@@ -14,5 +14,8 @@
     "express": "^4.15.4",
     "knex": "^0.13.0",
     "pg": "^7.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.5.0"
   }
 }
