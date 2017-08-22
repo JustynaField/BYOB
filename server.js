@@ -44,6 +44,25 @@ app.get('/api/v1/brewery/:id', (request, response) => {
   })
 })
 
+app.post('/api/v1/brewery', (request, response) => {
+  const newBrewery = request.body;
+
+  for (let requiredParameter of ['name']) {
+    if (!newBrewery[requiredParameter]) {
+      return response.status(422).json({
+        error: `Missing required parameter ${requiredParameter}`
+      })
+    }
+  }
+
+  database('brewery').insert(newBrewery, '*')
+  .then(brewery => {
+    response.status(201).json({ brewery })
+  })
+  .catch(error => {
+    response.status(500).json({ error })
+  })
+})
 
 app.get('/api/v1/beer', (request, response) => {
   database('beer').select()
@@ -69,9 +88,35 @@ app.get('/api/v1/beer/:id', (request, response) => {
     }
   })
   .catch(error => {
-    respone.status(500).json({error})
+    response.status(500).json({error})
   })
 })
+
+app.post('/api/v1/brewery/:id/beer', (request, response) => {
+  const newBeer = request.body
+
+  for(let requiredParameter of ['name', 'style', 'size', 'abv']) {
+    if (!newBeer[requiredParameter]) {
+      return response.status(422).json({
+        error: `Missing required parameter ${requiredParameter}`
+      });
+    }
+  }
+
+  newBeer.brewery_id = request.params.id
+
+  database('brewery').select()
+  .then(brewery => {
+    database('beer').insert(newBeer, '*')
+    .then(beer => {
+      response.status(201).json(beer[0])
+    })
+  })
+  .catch(error => {
+    response.status(500).json({ error })
+  })
+})
+
 
 app.listen(app.get('port'), () => {
   console.log(`BYOB is running on ${app.get('port')}.`);
