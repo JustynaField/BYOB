@@ -19,7 +19,7 @@ app.get('/', (request, response) => {
 app.get('/api/v1/brewery', (request, response) => {
   database('brewery').select()
   .then(breweries => {
-    response.status(200).json({breweries});
+    response.status(200).json(breweries);
   })
   .catch(error => {
     response.status(500).json({ error })
@@ -57,7 +57,7 @@ app.post('/api/v1/brewery', (request, response) => {
 
   database('brewery').insert(newBrewery, '*')
   .then(brewery => {
-    response.status(201).json({ brewery })
+    response.status(201).json( brewery )
   })
   .catch(error => {
     response.status(500).json({ error })
