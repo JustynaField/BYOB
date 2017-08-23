@@ -79,6 +79,17 @@ app.patch('/api/v1/brewery/:id', (request, response) => {
     })
 })
 
+app.delete('/api/v1/beer/:id', (request, response) => {
+  database('beer')
+    .where('id', request.params.id)
+    .del('*')
+    .then(data => {
+      response.status(201).json(data)
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    })
+})
 
 app.get('/api/v1/beer', (request, response) => {
   database('beer').select()
@@ -107,6 +118,32 @@ app.get('/api/v1/beer/:id', (request, response) => {
     response.status(500).json({error})
   })
 })
+
+app.get('/api/v1/brewery/:id/beer', (request, response) => {
+  database('beer')
+    .where('brewery_id', request.params.id)
+    .select()
+    .then(beer => {
+      response.status(200).json(beer);
+    })
+    .catch(error => {
+      response.status(404).json({
+        error: `Could not find brewery with id of ${request.params.id}`
+      })
+    })
+})
+
+app.delete('/api/v1/brewery/:id/beer', (request, response) => {
+  database('beer')
+    .where('brewery_id', request.params.id)
+    .del('*')
+    .then(data => {
+      response.status(201).json(data)
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    })
+});
 
 app.post('/api/v1/brewery/:id/beer', (request, response) => {
   const newBeer = request.body
@@ -147,6 +184,18 @@ app.patch('/api/v1/beer/:id', (request, response) => {
       response.status(500).json({ error })
     })
 })
+
+app.delete('/api/v1/beer/:id', (request, response) => {
+  database('beer')
+    .where('id', request.params.id)
+    .del('*')
+    .then(data => {
+      response.status(201).json(data)
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    })
+});
 
 app.listen(app.get('port'), () => {
   console.log(`BYOB is running on ${app.get('port')}.`);
