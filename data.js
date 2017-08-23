@@ -1,4 +1,4 @@
-const breweryData = [
+module.exports = [
   {
     'id': 1,
     'name': 'Great Divide Brewing Company',
