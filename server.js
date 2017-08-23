@@ -13,7 +13,7 @@ app.set('port', process.env.PORT || 3000);
 
 
 app.get('/', (request, response) => {
-  response.send('It\'s conected');
+  response.send('It\'s connected');
 });
 
 app.get('/api/v1/brewery', (request, response) => {
