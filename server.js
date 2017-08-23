@@ -64,6 +64,22 @@ app.post('/api/v1/brewery', (request, response) => {
   })
 })
 
+app.patch('/api/v1/brewery/:id', (request, response) => {
+  const newData = request.body;
+
+  database('brewery')
+    .where('id', request.params.id)
+    .update(newData, '*')
+    .then(data => {
+      response.status(201).json(data)
+    })
+    .catch(error => {
+      console.log(error)
+      response.status(500).json({ error })
+    })
+})
+
+
 app.get('/api/v1/beer', (request, response) => {
   database('beer').select()
   .then(beers => {
@@ -117,6 +133,20 @@ app.post('/api/v1/brewery/:id/beer', (request, response) => {
   })
 })
 
+app.patch('/api/v1/beer/:id', (request, response) => {
+  const newData = request.body;
+
+  database('beer')
+    .where('id', request.params.id)
+    .update(newData, '*')
+    .then(data => {
+      response.status(201).json(data)
+    })
+    .catch(error => {
+      console.log(error)
+      response.status(500).json({ error })
+    })
+})
 
 app.listen(app.get('port'), () => {
   console.log(`BYOB is running on ${app.get('port')}.`);
