@@ -1,4 +1,5 @@
-const breweryData = require('../../../data.js');
+const path = require('path');
+const breweryData = require(path.join(__dirname, '../../../data.js'));
 
 const createBrewery = (knex, brewery) => {
 	return knex('brewery').insert({
