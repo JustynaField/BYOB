@@ -21,15 +21,15 @@ module.exports = {
 		}
 	},
 
-	test: {
-		client: 'pg',
-		connection: process.env.DATABASE_URL || 'postgres://localhost/byob',
-		useNullAsDefault: true,
-		migrations: {
-			directory: './db/migrations'
-		},
-		seeds: {
-			directory: './db/test/seeds'
-		}
-	}
+  test: {
+    client: 'pg',
+    connection: process.env.DATABASE_URL || 'postgres://localhost/byob-test',
+    useNullAsDefault: true,
+    migrations: {
+      directory: './db/migrations'
+    },
+    seeds: {
+      directory: './db/test/seeds'
+    }
+  }
 };
