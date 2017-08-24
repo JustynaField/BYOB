@@ -16,8 +16,24 @@ app.get('/', (request, response) => {
 	response.sendFile(__dirname + '/index.html');
 });
 
+// app.get('/api/v1/brewery', (request, response) => {
+// 	database('brewery').select()
+// 		.then(breweries => {
+// 			response.status(200).json(breweries);
+// 		})
+// 		.catch(error => {
+// 			response.status(500).json({ error });
+// 		});
+// });
+
 app.get('/api/v1/brewery', (request, response) => {
-	database('brewery').select()
+	database('brewery')
+    .modify((queryParam) => {
+      if (request.query.name) {
+        queryParam.where("name", request.query.name)
+      }
+    })
+    .select()
 		.then(breweries => {
 			response.status(200).json(breweries);
 		})
