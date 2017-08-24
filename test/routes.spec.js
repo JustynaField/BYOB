@@ -16,6 +16,7 @@ describe('Client Routes', () => {
     });
   });
 
+
   it('should return 404 for a route that does not exist', () => {
     chai.request(server)
     .get('/api/v1/breweries')
