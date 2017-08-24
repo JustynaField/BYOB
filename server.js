@@ -151,3 +151,5 @@ app.patch('/api/v1/beer/:id', (request, response) => {
 app.listen(app.get('port'), () => {
 	console.log(`BYOB is running on ${app.get('port')}.`);
 });
+
+module.exports = app;
