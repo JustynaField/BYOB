@@ -29,16 +29,14 @@ const checkAuth = (request, response, next) => {
 	}
 	jwt.verify(token, app.get('secretKey'), (error, decoded) => {
 		if (error) {
-			return response.status(403).send('Invalid token.')
+			response.status(403).send('Invalid token.')
 		}
 
-		if (!decoded.admin) {
-			response.status(403).send('You must have admin privelages')
-		}
-
-		next()
-
-		// decoded.admin ? next() : response.status(403).send('You must have admin privelages')
+		if (decoded.admin) {
+			next()
+		} else {
+      response.status(403).send('You must have admin privelages')
+    }
 	})
 }
 
