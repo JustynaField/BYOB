@@ -1,30 +1,59 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
+
+const config = require('dotenv').config()
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', process.env.PORT || 3000);
+app.set('secretKey', process.env.SECRET_KEY);
 
 app.get('/', (request, response) => {
 	response.sendFile(__dirname + '/index.html');
 });
 
-// app.get('/api/v1/brewery', (request, response) => {
-// 	database('brewery').select()
-// 		.then(breweries => {
-// 			response.status(200).json(breweries);
-// 		})
-// 		.catch(error => {
-// 			response.status(500).json({ error });
-// 		});
-// });
+
+const checkAuth = (request, response, next) => {
+	const token = request.headers.token
+
+	if(!token) {
+		response.status(403).send('You must be authorized to hit this endpoint.')
+	}
+	jwt.verify(token, app.get('secretKey'), (error, decoded) => {
+		if (error) {
+			return response.status(403).send('Invalid token.')
+		}
+
+		if (!decoded.admin) {
+			response.status(403).send('You must have admin privelages')
+		}
+
+		next()
+
+		// decoded.admin ? next() : response.status(403).send('You must have admin privelages')
+	})
+}
+
+
+app.post('/authentication', (request, response) => {
+
+  const userData = request.body;
+
+  if(userData.email.endsWith('@turing.io')) {
+    userData.admin = true
+  }
+  let token = jwt.sign(userData, app.get('secretKey'), {expiresIn: "48h"})
+
+  response.status(200).json({ token })
+})
 
 app.get('/api/v1/brewery', (request, response) => {
 	database('brewery')
@@ -60,7 +89,7 @@ app.get('/api/v1/brewery/:id', (request, response) => {
 		});
 });
 
-app.post('/api/v1/brewery', (request, response) => {
+app.post('/api/v1/brewery', checkAuth, (request, response) => {
 	const newBrewery = request.body;
 
 	for (let requiredParameter of ['name']) {
@@ -70,7 +99,6 @@ app.post('/api/v1/brewery', (request, response) => {
 			});
 		}
 	}
-
 	database('brewery').insert(newBrewery, '*')
 		.then(brewery => {
 			response.status(201).json( brewery );

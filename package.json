@@ -12,7 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
     "express": "^4.15.4",
+    "jsonwebtoken": "^7.4.3",
     "knex": "^0.13.0",
     "path": "^0.12.7",
     "pg": "^7.1.2"
