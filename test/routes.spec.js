@@ -76,7 +76,7 @@ describe('API Routes', () => {
         response.body[0].should.have.property('name');
         response.body[0].name.should.equal('Great Divide Brewing Company');
         done();
-      })
+      });
     });
 
     it('should return an error if a requested brewery does not exist', (done) => {
@@ -85,8 +85,8 @@ describe('API Routes', () => {
       .end((error, response) => {
         response.should.have.status(404);
         done();
-      })
-    })
+      });
+    });
   });
 
   describe('POST /api/v1/brewery', () => {
@@ -111,7 +111,7 @@ describe('API Routes', () => {
           response.body[30].should.have.property('name');
           response.body[30].name.should.equal('New Local Brewery');
           done();
-        })
+        });
       });
     });
 
@@ -164,16 +164,38 @@ describe('API Routes', () => {
     });
 
     it('should not return beer that does not exist', (done) => {
-          chai.request(server)
-          .get('/api/v1/beer/100')
-          .end((error, response) => {
-            response.should.have.status(404);
-            done();
-          })
-        })
-
+      chai.request(server)
+      .get('/api/v1/beer/100')
+      .end((error, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
   })
 
+  describe('POST /api/v1/brewery/:id/beer', () => {
+
+    it('should post beer to a specific brewery', (done) => {
+      chai.request(server)
+      .post('/api/v1/brewery/1/beer')
+      .send({
+        id: 70,
+        name: 'New Beer',
+        style: 'Porter',
+        size: '12 oz',
+        abv: '4%',
+        brewery_id: 1
+      })
+      .end((error, response) => {
+        // console.log(response.body)
+        response.should.have.status(201);
+        response.body.should.be.a('object');
+        // response.body.should.have.property('name');
+        // response.body.name.should.equal('New Beer');
+        done()
+      })
+    })
+  })
 
 });
 
