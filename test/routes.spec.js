@@ -201,24 +201,6 @@ describe('API Routes', () => {
     });
   });
 
-  describe('DELETE /api/v1/beer/:id', () => {
-    it('should delete a specific beer', (done) => {
-      chai.request(server)
-      .delete('/api/v1/beer/1')
-      .end((error, response) => {
-        response.body.should.be.a('array');
-        response.body[0].should.be.a('object');
-        response.body.length.should.equal(1);
-        chai.request(server)
-        .get('/api/v1/beer')
-        .end((error, response) => {
-          response.body.length.should.equal(68);
-        });
-      done();
-      });
-    });
-  });
-
   describe('POST /api/v1/brewery/:id/beer', () => {
     it('should post beer to a specific brewery', (done) => {
       chai.request(server)
