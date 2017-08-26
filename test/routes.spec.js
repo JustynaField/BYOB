@@ -144,6 +144,18 @@ describe('API Routes', () => {
          done();
        })
      })
+
+     it.skip('should not update without required parameter of name', (done) => {
+       chai.request(server)
+       .patch('/api/v1/brewery/1')
+       .send({location: 'Denver'})
+       .end((error, response) => {
+         response.should.have.status(422);
+         response.body.error.should.equal('Missing required parameter name.');
+
+         done();
+       })
+     })
   });
 
   describe('GET /api/v1/beer', () => {
