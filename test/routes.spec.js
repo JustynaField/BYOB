@@ -89,28 +89,38 @@ describe('API Routes', () => {
 
 
   describe('POST /api/v1/brewery', () => {
-    it.skip('should create a new brewery', (done) => {
+    it('should create a new brewery', (done) => {
       chai.request(server)
-      .post('/api/v1/brewery')
+      .post('/authentication')
       .send({
-        name: 'New Local Brewery'
+        email: 'user@turing.io'
       })
       .end((error, response) => {
-        response.should.have.status(201);
-        response.body[0].should.be.a('object');
-        response.body[0].should.have.property('name');
-        response.body[0].name.should.equal('New Local Brewery');
-        response.body[0].id.should.equal(31);
+        let token = response.body
         chai.request(server)
-        .get('/api/v1/brewery')
+        .post('/api/v1/brewery')
+        .set({'token': `${token.token}` })
+        .send({
+          id: 3,
+          name: 'New Local Brewery'
+        })
         .end((error, response) => {
-          response.should.have.status(200);
-          response.should.be.json;
-          response.body.should.be.a('array');
-          response.body.length.should.equal(31);
-          response.body[30].should.have.property('name');
-          response.body[30].name.should.equal('New Local Brewery');
-          done();
+          response.should.have.status(201);
+          response.body[0].should.be.a('object');
+          response.body[0].should.have.property('name');
+          response.body[0].name.should.equal('New Local Brewery');
+          response.body[0].id.should.equal(3);
+          chai.request(server)
+          .get('/api/v1/brewery')
+          .end((error, response) => {
+            response.should.have.status(200);
+            response.should.be.json;
+            response.body.should.be.a('array');
+            response.body.length.should.equal(3);
+            response.body[2].should.have.property('name');
+            response.body[2].name.should.equal('New Local Brewery');
+            done();
+          });
         });
       });
     });
