@@ -223,31 +223,82 @@ describe('API Routes', () => {
     });
   });
 
-  // describe('DELETE /api/v1/brewery/:id/beer', () => {
-  //   it('should delete all beers for a specific brewery', (done) => {
-  //     chai.request(server)
-  //     .delete('/api/v1/brewery/')
-  //     .end((error, response) => {
-  //       response.body.should.be.a('array');
-  //       response.body[0].should.be.a('object');
-  //       response.body.length.should.equal(1);
-  //       chai.request(server)
-  //       .get('/api/v1/beer')
-  //       .end((error, response) => {
-  //         response.body.length.should.equal(68);
-  //       });
-  //     done();
-  //     });
-  //   });
-  // });
+  describe('DELETE /api/v1/brewery/:id/beer', () => {
+    it('should delete all beers for a specific brewery', (done) => {
+      chai.request(server)
+      .delete('/api/v1/brewery/1/beer')
+      .end((error, response) => {
+        response.body.obj.length.should.equal(2);
+        chai.request(server)
+        .get('/api/v1/beer')
+        .end((error, response) => {
+          response.body.length.should.equal(2);
+        });
+      done();
+      });
+    });
+
+    it('should not delete a beer if the brewery does not exist', (done) => {
+      chai.request(server)
+      .delete('/api/v1/brewery/200/beer')
+      .end((error, response) => {
+        response.should.have.status(404);
+        response.body.error.should.equal('No breweries with this id exist')
+        done();
+      })
+    })
+  });
+
+  describe('PATCH /api/v1/beer/:id', () => {
+    it('should update a specific beer', (done) => {
+       chai.request(server)
+       .patch('/api/v1/beer/1')
+       .send({
+         name: 'Updated Beer',
+         style: 'Updated Style'
+       })
+       .end((error, response) => {
+         response.should.have.status(201);
+         response.body[0].should.be.a('object');
+         response.body[0].should.have.property('name');
+         response.body[0].name.should.equal('Updated Beer');
+         response.body[0].should.have.property('style');
+         response.body[0].style.should.equal('Updated Style');
+         response.body[0].should.have.property('size');
+         response.body[0].size.should.equal('12 oz');
+         response.body[0].should.have.property('abv');
+         response.body[0].abv.should.equal('5.0%');
+         response.body[0].should.have.property('brewery_id');
+         response.body[0].brewery_id.should.equal(1);
+         done();
+       })
+     })
+  });
+
+  describe('DELETE /api/v1/beer/:id', () => {
+    it('should delete a specific beer', (done) => {
+      chai.request(server)
+      .delete('/api/v1/beer/1')
+      .end((error, response) => {
+        response.body.obj.length.should.equal(1);
+        chai.request(server)
+        .get('/api/v1/beer')
+        .end((error, response) => {
+          response.body.length.should.equal(3);
+        });
+      done();
+      });
+    });
+
+    it('should not delete beer if it does not exist', (done) => {
+      chai.request(server)
+      .delete('/api/v1/beer/200')
+      .end((error, response) => {
+        response.should.have.status(404);
+        response.body.error.should.equal('No beers exist with that id')
+        done()
+      })
+    })
+  });
 
 })
-
-
-
-
-
-
-
-
-//
