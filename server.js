@@ -174,11 +174,15 @@ app.delete('/api/v1/brewery/:id/beer', (request, response) => {
   database('beer')
     .where('brewery_id', request.params.id)
     .del('*')
-    .then(data => {
-      response.status(201).json(data)
-    })
+		.then(obj => {
+			if (obj.length) {
+				response.status(201).json({obj})
+			} else {
+				response.status(404).json({error: 'No breweries with this id exist'})
+			}
+		})
     .catch(error => {
-      response.status(500).json({ error })
+      response.status(500).json({ error: 'Request cannot be processed' })
     })
 });
 
