@@ -56,15 +56,16 @@ describe('API Routes', () => {
         response.body.should.be.a('array');
         response.body.length.should.equal(30);
         response.body[0].should.have.property('name');
-        // response.body[0].name.should.equal('Great Divide Brewing Company');
+        response.body.find(obj => {
+          return obj.name === 'Great Divide Brewing Company'
+        }).name.should.equal('Great Divide Brewing Company');
         done();
       });
     });
   });
 
   describe('GET /api/v1/brewery/:id', () => {
-
-    it.skip('should return a brewery by id', (done) => {
+    it('should return a brewery by id', (done) => {
       chai.request(server)
       .get('/api/v1/brewery/1')
       .end((error, response) => {
@@ -74,7 +75,9 @@ describe('API Routes', () => {
         response.body[0].should.be.a('object');
         response.body.length.should.equal(1);
         response.body[0].should.have.property('name');
-        // response.body[0].name.should.equal('Great Divide Brewing Company');
+        response.body.find(obj => {
+          return obj.name === 'Great Divide Brewing Company'
+        }).name.should.equal('Great Divide Brewing Company');
         done();
       });
     });
@@ -89,7 +92,8 @@ describe('API Routes', () => {
     });
   });
 
-  describe.skip('POST /api/v1/brewery', () => {
+
+  describe('POST /api/v1/brewery', () => {
     it('should create a new brewery', (done) => {
       chai.request(server)
       .post('/api/v1/brewery')
@@ -99,9 +103,10 @@ describe('API Routes', () => {
       .end((error, response) => {
         console.log(response.body)
         response.should.have.status(201);
-        response.body.should.be.a('object');
-        response.body.should.have.property('name');
-        response.body.lastname.should.equal('New Local Brewery');
+        response.body[0].should.be.a('object');
+        response.body[0].should.have.property('name');
+        response.body[0].name.should.equal('New Local Brewery');
+        response.body[0].id.should.equal(31);
         chai.request(server)
         .get('/api/v1/brewery')
         .end((error, response) => {
@@ -123,7 +128,7 @@ describe('API Routes', () => {
         brewery_name: 'New Brewery'
       })
       .end((error, response) => {
-        respons.should.have.status(422);
+        response.should.have.status(422);
         response.body.error.should.equal('Missing required parameter name.');
         done();
       });
@@ -157,22 +162,28 @@ describe('API Routes', () => {
         response.body.should.be.a('array');
         response.body.length.should.equal(69);
         response.body[0].should.have.property('name');
-        // response.body[0].name.should.equal('Denver Pale Ale');
+        response.body.find(obj => {
+          return obj.name === 'Denver Pale Ale'
+        }).name.should.equal('Denver Pale Ale');
         response.body[0].should.have.property('style');
-        // response.body[0].style.should.equal('American Pale Wheat Ale(APA)');
+        response.body.find(obj => {
+          return obj.style === 'American Pale Wheat Ale(APA)'
+        }).style.should.equal('American Pale Wheat Ale(APA)');
         response.body[0].should.have.property('size');
         // response.body[0].size.should.equal('12 oz');
         response.body[0].should.have.property('abv');
-        // response.body[0].abv.should.equal('5.0%');
+        response.body.find(obj => {
+          return obj.name === 'Denver Pale Ale'
+        }).abv.should.equal('5.0%');
         done();
       });
     });
   });
 
   describe('GET /api/v1/beer/:id', () => {
-    it.skip('should return beer by id', (done) => {
+    it('should return beer by id', (done) => {
       chai.request(server)
-      .get('api/v1/beer/1')
+      .get('/api/v1/beer/3')
       .end((error, response) => {
         response.should.have.status(200);
         response.should.be.json;
@@ -221,11 +232,10 @@ describe('API Routes', () => {
         brewery_id: 1
       })
       .end((error, response) => {
-        // console.log(response.body)
         response.should.have.status(201);
         response.body.should.be.a('object');
-        // response.body.should.have.property('name');
-        // response.body.name.should.equal('New Beer');
+        response.body.should.have.property('name');
+        response.body.name.should.equal('New Beer');
         done()
       });
     });
