@@ -72,9 +72,7 @@ describe('API Routes', () => {
         response.body[0].should.be.a('object');
         response.body.length.should.equal(1);
         response.body[0].should.have.property('name');
-        response.body.find(obj => {
-          return obj.name === 'Great Divide Brewing Company'
-        }).name.should.equal('Great Divide Brewing Company');
+        response.body[0].id.should.equal(1);
         done();
       });
     });
@@ -91,14 +89,13 @@ describe('API Routes', () => {
 
 
   describe('POST /api/v1/brewery', () => {
-    it('should create a new brewery', (done) => {
+    it.skip('should create a new brewery', (done) => {
       chai.request(server)
       .post('/api/v1/brewery')
       .send({
         name: 'New Local Brewery'
       })
       .end((error, response) => {
-        console.log(response.body)
         response.should.have.status(201);
         response.body[0].should.be.a('object');
         response.body[0].should.have.property('name');
@@ -112,13 +109,13 @@ describe('API Routes', () => {
           response.body.should.be.a('array');
           response.body.length.should.equal(31);
           response.body[30].should.have.property('name');
-          // response.body[30].name.should.equal('New Local Brewery');
+          response.body[30].name.should.equal('New Local Brewery');
           done();
         });
       });
     });
 
-    it('should not create a record if "name" parameter is missing', () => {
+    it.skip('should not create a record if "name" parameter is missing', (done) => {
       chai.request(server)
       .post('/api/v1/brewery')
       .send({
@@ -133,7 +130,7 @@ describe('API Routes', () => {
   });
 
   describe('PATCH /api/v1/brewery/:id', () => {
-    it('should update a specific brewery', (done) => {
+    it.skip('should update a specific brewery', (done) => {
        chai.request(server)
        .patch('/api/v1/brewery/1')
        .send({
@@ -157,21 +154,15 @@ describe('API Routes', () => {
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a('array');
-        response.body.length.should.equal(69);
+        response.body.length.should.equal(4);
         response.body[0].should.have.property('name');
-        response.body.find(obj => {
-          return obj.name === 'Denver Pale Ale'
-        }).name.should.equal('Denver Pale Ale');
+        response.body[0].name.should.equal('Denver Pale Ale');
         response.body[0].should.have.property('style');
-        response.body.find(obj => {
-          return obj.style === 'American Pale Wheat Ale(APA)'
-        }).style.should.equal('American Pale Wheat Ale(APA)');
+        response.body[0].style.should.equal('American Pale Wheat Ale(APA)');
         response.body[0].should.have.property('size');
-        // response.body[0].size.should.equal('12 oz');
+        response.body[0].size.should.equal('12 oz');
         response.body[0].should.have.property('abv');
-        response.body.find(obj => {
-          return obj.name === 'Denver Pale Ale'
-        }).abv.should.equal('5.0%');
+        response.body[0].abv.should.equal('5.0%');
         done();
       });
     });
