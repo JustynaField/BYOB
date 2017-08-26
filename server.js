@@ -128,18 +128,6 @@ app.patch('/api/v1/brewery/:id', checkAuth, (request, response) => {
 		});
 });
 
-app.delete('/api/v1/beer/:id', (request, response) => {
-  database('beer')
-    .where('id', request.params.id)
-    .del('*')
-    .then(data => {
-      response.status(201).json(data)
-    })
-    .catch(error => {
-      response.status(500).json({ error })
-    })
-})
-
 app.get('/api/v1/beer', (request, response) => {
 	database('beer').select()
 		.then(beers => {
