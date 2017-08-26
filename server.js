@@ -105,8 +105,16 @@ app.post('/api/v1/brewery', checkAuth, (request, response) => {
 		});
 });
 
-app.patch('/api/v1/brewery/:id', (request, response) => {
+app.patch('/api/v1/brewery/:id', checkAuth, (request, response) => {
 	const newData = request.body;
+
+	for (let requiredParameter of ['name']) {
+		if (!newData[requiredParameter]) {
+			return response.status(422).json({
+				error: `Missing required parameter ${requiredParameter}`
+			});
+		}
+	}
 
 	database('brewery')
 		.where('id', request.params.id)
