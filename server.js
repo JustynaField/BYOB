@@ -47,6 +47,7 @@ app.post('/authentication', (request, response) => {
   if(userData.email.endsWith('@turing.io')) {
     userData.admin = true
   }
+
   let token = jwt.sign(userData, app.get('secretKey'), {expiresIn: "48h"})
 
   response.status(200).json({ token })
