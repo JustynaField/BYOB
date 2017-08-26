@@ -33,17 +33,16 @@ describe('Client Routes', () => {
 
 describe('API Routes', () => {
 
+  before((done) => {
+    database.migrate.latest()
+      .then(() => done())
+      .catch(error => console.log(error));
+  });
+
   beforeEach((done) => {
-    database.migrate.rollback()
-    .then(() => {
-      database.migrate.latest()
-      .then(() => {
-        database.seed.run()
-        .then(() => {
-          done();
-        });
-      });
-    });
+    database.seed.run()
+      .then(() => done())
+      .catch(error => console.log(error));
   });
 
   describe('GET /api/v1/brewery', () => {

@@ -96,6 +96,7 @@ app.post('/api/v1/brewery', checkAuth, (request, response) => {
 			});
 		}
 	}
+
 	database('brewery').insert(newBrewery, '*')
 		.then(brewery => {
 			response.status(201).json( brewery );
