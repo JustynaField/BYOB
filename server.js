@@ -41,7 +41,6 @@ const checkAuth = (request, response, next) => {
 }
 
 app.post('/authentication', (request, response) => {
-
   const userData = request.body;
 
 	for (let requiredParameter of ['email', 'appName']) {
