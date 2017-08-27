@@ -30,7 +30,8 @@ input {
 }
 
 input:focus, button:focus {
-  outline: none;
+  outline: 1px solid #21100b;
+
 }
 
 #email {
@@ -44,6 +45,10 @@ button {
   background-color: #7a5b2c;
   border: 1px solid #21100b;
   font-size: 18px;
+}
+
+button:hover {
+  background-color: #6b5027;
 }
 
 #token {
