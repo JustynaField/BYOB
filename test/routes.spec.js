@@ -340,6 +340,30 @@ describe('API Routes', () => {
       });
     })
 
+    it('should not add a beer if the id does not exist ', (done) => {
+      chai.request(server)
+      .post('/authentication')
+      .send({
+        email: 'user@turing.io'
+      })
+      .end((error, response) => {
+        let token = response.body
+        chai.request(server)
+        .post('/api/v1/brewery/50/beer')
+        .set({'token': `${token.token}`})
+        .send({
+          id: 5,
+          name: 'New Beer',
+          style: 'Porter',
+          size: '12 oz',
+          abv: '4%'
+        })
+        .end((error, response) => {
+          response.should.have.status(404);
+          done()
+        });
+      });
+    })
   });
 
   describe('DELETE /api/v1/brewery/:id/beer', () => {
