@@ -163,13 +163,20 @@ app.get('/api/v1/brewery/:id/beer', (request, response) => {
     .where('brewery_id', request.params.id)
     .select()
     .then(beer => {
+			if (beer.length) {
+				response.status(200).json({beer})
 			} else {
 				response.status(404).json({error: 'No breweries with this id exist'})
 			}
-    .catch(error => {
-      response.status(500).json({ error: 'Request cannot be processed' })
     })
+    .catch(error => {
+      response.status(500).json({
+        error: 'Request cannot be processed'
+      })
+    })
+})
 
+app.post('/api/v1/brewery/:id/beer', checkAuth, (request, response) => {
 	const newBeer = request.body;
 
 	for(let requiredParameter of ['name', 'style', 'size', 'abv']) {
