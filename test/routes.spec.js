@@ -122,7 +122,8 @@ describe('API Routes', () => {
       chai.request(server)
       .post('/authentication')
       .send({
-        email: 'user@turing.io'
+        email: 'user@turing.io',
+        appName: 'appName'
       })
       .end((error, response) => {
         let token = response.body
@@ -158,7 +159,8 @@ describe('API Routes', () => {
       chai.request(server)
       .post('/authentication')
       .send({
-        email: 'user@turing.io'
+        email: 'user@turing.io',
+        appName: 'appName'
       })
       .end((error, response) => {
         let token = response.body
@@ -182,7 +184,8 @@ describe('API Routes', () => {
       chai.request(server)
       .post('/authentication')
       .send({
-       email: 'user@turing.io'
+       email: 'user@turing.io',
+       appName: 'appName'
       })
       .end((error, response) => {
         let token = response.body
@@ -284,66 +287,156 @@ describe('API Routes', () => {
       .end((error, response) => {
         response.should.have.status(200);
         response.should.be.json;
-        response.body.should.be.a('array');
-        response.body[0].should.be.a('object');
-        response.body.length.should.equal(2);
-        response.body[0].should.have.property('name');
-        response.body[0].name.should.equal('Denver Pale Ale');
-        response.body[1].should.have.property('name');
-        response.body[1].name.should.equal('Hibernation Ale');
-        response.body[0].should.have.property('id');
-        response.body[0].id.should.equal(1);
-        response.body[1].should.have.property('id');
-        response.body[1].id.should.equal(2);
+        response.body.beer.should.be.a('array');
+        response.body.beer[0].should.be.a('object');
+        response.body.beer.length.should.equal(2);
+        response.body.beer[0].should.have.property('name');
+        response.body.beer[0].name.should.equal('Denver Pale Ale');
+        response.body.beer[1].should.have.property('name');
+        response.body.beer[1].name.should.equal('Hibernation Ale');
+        response.body.beer[0].should.have.property('id');
+        response.body.beer[0].id.should.equal(1);
+        response.body.beer[1].should.have.property('id');
+        response.body.beer[1].id.should.equal(2);
         done();
       });
     });
+
+    it('should return no beers if id is not found', (done) => {
+      chai.request(server)
+      .get('/api/v1/brewery/50/beer')
+      .end((error, response) => {
+        response.should.have.status(404)
+        response.body.error.should.equal('No breweries with this id exist')
+        done();
+      })
+    })
   });
 
   describe('POST /api/v1/brewery/:id/beer', () => {
     it('should post beer to a specific brewery', (done) => {
       chai.request(server)
-      .post('/api/v1/brewery/1/beer')
+      .post('/authentication')
       .send({
-        id: 70,
-        name: 'New Beer',
-        style: 'Porter',
-        size: '12 oz',
-        abv: '4%',
-        brewery_id: 1
+        email: 'user@turing.io',
+        appName: 'appName'
       })
       .end((error, response) => {
-        response.should.have.status(201);
-        response.body.should.be.a('object');
-        response.body.should.have.property('name');
-        response.body.name.should.equal('New Beer');
-        done()
+        let token = response.body
+        chai.request(server)
+        .post('/api/v1/brewery/1/beer')
+        .set({'token': `${token.token}`})
+        .send({
+          id: 5,
+          name: 'New Beer',
+          style: 'Porter',
+          size: '12 oz',
+          abv: '4%',
+          brewery_id: 1
+        })
+        .end((error, response) => {
+          response.should.have.status(201);
+          response.body.should.be.a('object');
+          response.body.beer[0].should.have.property('name');
+          response.body.beer[0].name.should.equal('New Beer');
+          done()
+        });
       });
     });
+
+    it('should not post a beer missing required parameters', (done) => {
+      chai.request(server)
+      .post('/authentication')
+      .send({
+        email: 'user@turing.io'
+      })
+      .end((error, response) => {
+        let token = response.body
+        chai.request(server)
+        .post('/api/v1/brewery/1/beer')
+        .set({'token': `${token.token}`})
+        .send({
+          id: 5,
+          style: 'Porter',
+          size: '12 oz',
+          abv: '4%',
+          brewery_id: 1
+        })
+        .end((error, response) => {
+          response.should.have.status(422);
+          done()
+        });
+      });
+    })
+
+    it('should not add a beer if the id does not exist ', (done) => {
+      chai.request(server)
+      .post('/authentication')
+      .send({
+        email: 'user@turing.io'
+      })
+      .end((error, response) => {
+        let token = response.body
+        chai.request(server)
+        .post('/api/v1/brewery/50/beer')
+        .set({'token': `${token.token}`})
+        .send({
+          id: 5,
+          name: 'New Beer',
+          style: 'Porter',
+          size: '12 oz',
+          abv: '4%'
+        })
+        .end((error, response) => {
+          response.should.have.status(404);
+          done()
+        });
+      });
+    })
   });
 
   describe('DELETE /api/v1/brewery/:id/beer', () => {
     it('should delete all beers for a specific brewery', (done) => {
       chai.request(server)
-      .delete('/api/v1/brewery/1/beer')
+      .post('/authentication')
+      .send({
+        email: 'user@turing.io',
+        appName: 'appName'
+      })
       .end((error, response) => {
-        response.body.obj.length.should.equal(2);
+        let token = response.body
         chai.request(server)
-        .get('/api/v1/beer')
+        .delete('/api/v1/brewery/1/beer')
+        .set({'token': `${token.token}`})
         .end((error, response) => {
-          response.body.length.should.equal(2);
+          response.body.obj.length.should.equal(2);
+          chai.request(server)
+          .get('/api/v1/beer')
+          .end((error, response) => {
+            response.body.length.should.equal(2);
+          });
+        done();
         });
-      done();
       });
     });
 
     it('should not delete a beer if the brewery does not exist', (done) => {
       chai.request(server)
-      .delete('/api/v1/brewery/200/beer')
+      .post('/authentication')
+      .send({
+        email: 'user@turing.io',
+        appName: 'appName'
+      })
       .end((error, response) => {
-        response.should.have.status(404);
-        response.body.error.should.equal('No breweries with this id exist')
-        done();
+        let token = response.body;
+        chai.request(server)
+        .delete('/api/v1/brewery/200/beer')
+        .set({'token': `${token.token}`})
+        .end((error, response) => {
+          response.should.have.status(404);
+          response.body.error.should.equal('No breweries with this id exist')
+          done();
+        })
       })
     })
   });
@@ -358,20 +451,32 @@ describe('API Routes', () => {
       })
       .end((error, response) => {
         response.should.have.status(201);
-        response.body[0].should.be.a('object');
-        response.body[0].should.have.property('name');
-        response.body[0].name.should.equal('Updated Beer');
-        response.body[0].should.have.property('style');
-        response.body[0].style.should.equal('Updated Style');
-        response.body[0].should.have.property('size');
-        response.body[0].size.should.equal('12 oz');
-        response.body[0].should.have.property('abv');
-        response.body[0].abv.should.equal('5.0%');
-        response.body[0].should.have.property('brewery_id');
-        response.body[0].brewery_id.should.equal(1);
+        response.body.data[0].should.be.a('object');
+        response.body.data[0].should.have.property('name');
+        response.body.data[0].name.should.equal('Updated Beer');
+        response.body.data[0].should.have.property('style');
+        response.body.data[0].style.should.equal('Updated Style');
+        response.body.data[0].should.have.property('size');
+        response.body.data[0].size.should.equal('12 oz');
+        response.body.data[0].should.have.property('abv');
+        response.body.data[0].abv.should.equal('5.0%');
+        response.body.data[0].should.have.property('brewery_id');
+        response.body.data[0].brewery_id.should.equal(1);
         done();
       });
     });
+
+    it('should not add a beer if id does not exist', () => {
+      chai.request(server)
+      .patch('/api/v1/beer/300')
+      .send({
+        name: 'Updated Beer',
+        style: 'Updated Style'
+      })
+      .end((error, response) => {
+        response.should.have.status(404);
+      })
+    })
   });
 
   describe('DELETE /api/v1/beer/:id', () => {

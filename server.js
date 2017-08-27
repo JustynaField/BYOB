@@ -170,32 +170,20 @@ app.get('/api/v1/brewery/:id/beer', (request, response) => {
     .where('brewery_id', request.params.id)
     .select()
     .then(beer => {
-      response.status(200).json(beer);
+			if (beer.length) {
+				response.status(200).json({beer})
+			} else {
+				response.status(404).json({error: 'No breweries with this id exist'})
+			}
     })
     .catch(error => {
-      response.status(404).json({
-        error: `Could not find brewery with id of ${request.params.id}`
+      response.status(500).json({
+        error: 'Request cannot be processed'
       })
     })
 })
 
-app.delete('/api/v1/brewery/:id/beer', (request, response) => {
-  database('beer')
-    .where('brewery_id', request.params.id)
-    .del('*')
-		.then(obj => {
-			if (obj.length) {
-				response.status(201).json({obj})
-			} else {
-				response.status(404).json({error: 'No breweries with this id exist'})
-			}
-		})
-    .catch(error => {
-      response.status(500).json({ error: 'Request cannot be processed' })
-    })
-});
-
-app.post('/api/v1/brewery/:id/beer', (request, response) => {
+app.post('/api/v1/brewery/:id/beer', checkAuth, (request, response) => {
 	const newBeer = request.body;
 
 	for(let requiredParameter of ['name', 'style', 'size', 'abv']) {
@@ -212,12 +200,31 @@ app.post('/api/v1/brewery/:id/beer', (request, response) => {
 		.then(brewery => {
 			database('beer').insert(newBeer, '*')
 				.then(beer => {
-					response.status(201).json(beer[0]);
-				});
+					response.status(201).json({beer});
+				})
+				.catch(error => {
+					response.status(404).json({error: 'No breweries with this id exist'})
+				})
 		})
 		.catch(error => {
-			response.status(500).json({ error });
+			response.status(500).json({ error: 'Request cannot be processed' });
 		});
+});
+
+app.delete('/api/v1/brewery/:id/beer', checkAuth, (request, response) => {
+  database('beer')
+    .where('brewery_id', request.params.id)
+    .del('*')
+		.then(obj => {
+			if (obj.length) {
+				response.status(201).json({obj})
+			} else {
+				response.status(404).json({error: 'No breweries with this id exist'})
+			}
+		})
+    .catch(error => {
+      response.status(500).json({ error: 'Request cannot be processed' })
+    })
 });
 
 app.patch('/api/v1/beer/:id', (request, response) => {
@@ -227,10 +234,13 @@ app.patch('/api/v1/beer/:id', (request, response) => {
 		.where('id', request.params.id)
 		.update(newData, '*')
 		.then(data => {
-			response.status(201).json(data);
+			if (data.length) {
+				response.status(201).json({data})
+			} else {
+				response.status(404).json({error: 'No beers exist with that id'})
+			}
 		})
 		.catch(error => {
-			console.log(error);
 			response.status(500).json({ error });
 		});
 });
@@ -241,7 +251,7 @@ app.delete('/api/v1/beer/:id', (request, response) => {
     .del('*')
 		.then(obj => {
 			if (obj.length) {
-				response.status(201).json({obj})
+				response.status(200).json({obj})
 			} else {
 				response.status(404).json({error: 'No beers exist with that id'})
 			}
