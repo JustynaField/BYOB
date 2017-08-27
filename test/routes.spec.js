@@ -41,7 +41,7 @@ describe('Authentication', () => {
       .post('/authentication')
       .send({
         email: 'user@turing.io',
-        appName: 'My App',
+        appName: 'My App'
       })
       .end((error, response) => {
         response.should.have.status(200);
@@ -53,7 +53,7 @@ describe('Authentication', () => {
     chai.request(server)
       .post('/authentication')
       .send({
-        email: 'user@turing.io',
+        email: 'user@turing.io'
       })
       .end((error, response) => {
         response.should.have.status(422);
@@ -127,7 +127,7 @@ describe('API Routes', () => {
         .post('/authentication')
         .send({
           email: 'user@turing.io',
-          appName: 'appName',
+          appName: 'appName'
         })
         .end((error, response) => {
           const token = response.body;
@@ -136,7 +136,7 @@ describe('API Routes', () => {
             .set({ token: `${token.token}` })
             .send({
               id: 3,
-              name: 'New Local Brewery',
+              name: 'New Local Brewery'
             })
             .end((error, response) => {
               response.should.have.status(201);
@@ -168,7 +168,7 @@ describe('API Routes', () => {
         .post('/authentication')
         .send({
           email: 'user@turing.io',
-          appName: 'appName',
+          appName: 'appName'
         })
         .end((error, response) => {
           const token = response.body;
@@ -176,7 +176,7 @@ describe('API Routes', () => {
             .post('/api/v1/brewery')
             .set({ token: `${token.token}` })
             .send({
-              brewery_name: 'New Brewery',
+              brewery_name: 'New Brewery'
             })
             .end((error, response) => {
               response.should.have.status(422);
@@ -193,7 +193,7 @@ describe('API Routes', () => {
         .post('/authentication')
         .send({
           email: 'user@turing.io',
-          appName: 'appName',
+          appName: 'appName'
         })
         .end((error, response) => {
           const token = response.body;
@@ -201,7 +201,7 @@ describe('API Routes', () => {
             .patch('/api/v1/brewery/1')
             .set({ token: `${token.token}` })
             .send({
-              name: 'Updated Name',
+              name: 'Updated Name'
             })
             .end((error, response) => {
               response.should.have.status(201);
@@ -226,7 +226,7 @@ describe('API Routes', () => {
         .post('/authentication')
         .send({
           email: 'user@turing.io',
-          appName: 'appName',
+          appName: 'appName'
         })
         .end((error, response) => {
           const token = response.body;
@@ -234,7 +234,7 @@ describe('API Routes', () => {
             .patch('/api/v1/brewery/1')
             .set({ token: `${token.token}` })
             .send({
-              location: 'Denver',
+              location: 'Denver'
             })
             .end((error, response) => {
               response.should.have.status(422);
@@ -342,7 +342,7 @@ describe('API Routes', () => {
         .post('/authentication')
         .send({
           email: 'user@turing.io',
-          appName: 'appName',
+          appName: 'appName'
         })
         .end((error, response) => {
           const token = response.body;
@@ -355,7 +355,7 @@ describe('API Routes', () => {
               style: 'Porter',
               size: '12 oz',
               abv: '4%',
-              brewery_id: 1,
+              brewery_id: 1
             })
             .end((error, response) => {
               response.should.have.status(201);
@@ -372,7 +372,7 @@ describe('API Routes', () => {
         .post('/authentication')
         .send({
           email: 'user@turing.io',
-          appName: 'appName',
+          appName: 'appName'
         })
         .end((error, response) => {
           const token = response.body;
@@ -384,7 +384,7 @@ describe('API Routes', () => {
               style: 'Porter',
               size: '12 oz',
               abv: '4%',
-              brewery_id: 1,
+              brewery_id: 1
             })
             .end((error, response) => {
               response.should.have.status(422);
@@ -398,7 +398,7 @@ describe('API Routes', () => {
         .post('/authentication')
         .send({
           email: 'user@turing.io',
-          appName: 'appName',
+          appName: 'appName'
         })
         .end((error, response) => {
           const token = response.body;
@@ -410,7 +410,7 @@ describe('API Routes', () => {
               name: 'New Beer',
               style: 'Porter',
               size: '12 oz',
-              abv: '4%',
+              abv: '4%'
             })
             .end((error, response) => {
               response.should.have.status(404);
@@ -426,7 +426,7 @@ describe('API Routes', () => {
         .post('/authentication')
         .send({
           email: 'user@turing.io',
-          appName: 'appName',
+          appName: 'appName'
         })
         .end((error, response) => {
           const token = response.body;
@@ -450,7 +450,7 @@ describe('API Routes', () => {
         .post('/authentication')
         .send({
           email: 'user@turing.io',
-          appName: 'appName',
+          appName: 'appName'
         })
         .end((error, response) => {
           const token = response.body;
@@ -472,7 +472,7 @@ describe('API Routes', () => {
         .patch('/api/v1/beer/1')
         .send({
           name: 'Updated Beer',
-          style: 'Updated Style',
+          style: 'Updated Style'
         })
         .end((error, response) => {
           response.should.have.status(201);
@@ -496,7 +496,7 @@ describe('API Routes', () => {
         .patch('/api/v1/beer/300')
         .send({
           name: 'Updated Beer',
-          style: 'Updated Style',
+          style: 'Updated Style'
         })
         .end((error, response) => {
           response.should.have.status(404);
@@ -529,4 +529,4 @@ describe('API Routes', () => {
         });
     });
   });
-})
+});

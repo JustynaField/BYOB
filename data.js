@@ -9,7 +9,7 @@ module.exports = [
         style: 'American Pale Wheat Ale(APA)',
         size: '12 oz',
         abv: '5.0%',
-        brewery_id: 1,
+        brewery_id: 1
       },
       {
         id: 2,
@@ -17,7 +17,7 @@ module.exports = [
         style: 'Old Ale',
         size: '12 oz',
         abv: '8.7%',
-        brewery_id: 1,
+        brewery_id: 1
       },
       {
         id: 3,
@@ -25,9 +25,9 @@ module.exports = [
         style: 'American Pale Wheat Ale',
         size: '12 oz',
         abv: '6.1%',
-        brewery_id: 1,
-      },
-    ],
+        brewery_id: 1
+      }
+    ]
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ module.exports = [
         style: 'American Double/ Imperial IPA',
         size: '12 oz',
         abv: '8.0%',
-        brewery_id: 2,
+        brewery_id: 2
       },
       {
         id: 5,
@@ -47,9 +47,9 @@ module.exports = [
         style: 'Saison/ Farmhouse Ale',
         size: '12 oz',
         abv: '6.4%',
-        brewery_id: 2,
-      },
-    ],
+        brewery_id: 2
+      }
+    ]
   },
   {
     id: 3,
@@ -61,7 +61,7 @@ module.exports = [
         style: 'Saison/Farmhouse Ale',
         size: '12 oz',
         abv: '6.0%',
-        brewery_id: 3,
+        brewery_id: 3
       },
       {
         id: 7,
@@ -69,9 +69,9 @@ module.exports = [
         style: 'American Brown Ale',
         size: '19.2 oz',
         abv: '7.6%',
-        brewery_id: 3,
-      },
-    ],
+        brewery_id: 3
+      }
+    ]
   },
   {
     id: 4,
@@ -83,9 +83,9 @@ module.exports = [
         style: 'Fruit/Vegetable Beer',
         size: '12 oz',
         abv: '5.2%',
-        brewery_id: 4,
-      },
-    ],
+        brewery_id: 4
+      }
+    ]
   },
   {
     id: 5,
@@ -97,9 +97,9 @@ module.exports = [
         style: 'American Pale Ale',
         size: '12 oz',
         abv: '6.6%',
-        brewery_id: 5,
-      },
-    ],
+        brewery_id: 5
+      }
+    ]
   },
   {
     id: 6,
@@ -111,7 +111,7 @@ module.exports = [
         style: 'Scotch Ale/Wee Heavy',
         size: '12 oz',
         abv: '8.7%',
-        brewery_id: 6,
+        brewery_id: 6
       },
       {
         id: 11,
@@ -119,7 +119,7 @@ module.exports = [
         style: 'American Porter',
         size: '12 oz',
         abv: '5.4%',
-        brewery_id: 6,
+        brewery_id: 6
       },
       {
         id: 12,
@@ -127,9 +127,9 @@ module.exports = [
         style: 'Belgian Strong Darke Ale',
         size: '12 oz',
         abv: '9.2%',
-        brewery_id: 6,
-      },
-    ],
+        brewery_id: 6
+      }
+    ]
   },
   {
     id: 7,
@@ -141,7 +141,7 @@ module.exports = [
         style: 'American Pilsner',
         size: '12 oz',
         abv: '6.3%',
-        brewery_id: 7,
+        brewery_id: 7
       },
       {
         id: 14,
@@ -149,9 +149,9 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '12 oz',
         abv: '7.0%',
-        brewery_id: 7,
-      },
-    ],
+        brewery_id: 7
+      }
+    ]
   },
   {
     id: 8,
@@ -163,7 +163,7 @@ module.exports = [
         style: 'American Pale Lager',
         size: '12 oz',
         abv: '5.0%',
-        brewery_id: 8,
+        brewery_id: 8
       },
       {
         id: 16,
@@ -171,7 +171,7 @@ module.exports = [
         style: 'Euro Dark Lager',
         size: '12 oz',
         abv: '5.6%',
-        brewery_id: 8,
+        brewery_id: 8
       },
       {
         id: 17,
@@ -179,7 +179,7 @@ module.exports = [
         style: 'Czech pilsner',
         size: '12 oz',
         abv: '4.8%',
-        brewery_id: 8,
+        brewery_id: 8
       },
       {
         id: 18,
@@ -187,7 +187,7 @@ module.exports = [
         style: 'American Amber/Red Lager',
         size: '12 oz',
         abv: '5.5%',
-        brewery_id: 8,
+        brewery_id: 8
       },
       {
         id: 19,
@@ -195,9 +195,9 @@ module.exports = [
         style: 'American Pale Wheat Ale',
         size: '16 oz',
         abv: '5.2%',
-        brewery_id: 8,
-      },
-    ],
+        brewery_id: 8
+      }
+    ]
   },
   {
     id: 9,
@@ -209,7 +209,7 @@ module.exports = [
         style: 'American Pilsner',
         size: '32 oz',
         abv: '???',
-        brewery_id: 9,
+        brewery_id: 9
       },
       {
         id: 21,
@@ -217,7 +217,7 @@ module.exports = [
         style: 'American IPA',
         size: '16 oz',
         abv: '???',
-        brewery_id: 9,
+        brewery_id: 9
       },
       {
         id: 22,
@@ -225,9 +225,9 @@ module.exports = [
         style: 'American IPA',
         size: '12 oz',
         abv: '5.0%',
-        brewery_id: 9,
-      },
-    ],
+        brewery_id: 9
+      }
+    ]
   },
   {
     id: 10,
@@ -239,7 +239,7 @@ module.exports = [
         style: 'American Pilsner',
         size: '12 oz',
         abv: '7.4%',
-        brewery_id: 10,
+        brewery_id: 10
       },
       {
         id: 24,
@@ -247,9 +247,9 @@ module.exports = [
         style: 'American IPA',
         size: '12 oz',
         abv: '6.8%',
-        brewery_id: 10,
-      },
-    ],
+        brewery_id: 10
+      }
+    ]
   },
   {
     id: 11,
@@ -261,7 +261,7 @@ module.exports = [
         style: 'American Pilsner',
         size: '16 oz',
         abv: '7.0%',
-        brewery_id: 11,
+        brewery_id: 11
       },
       {
         id: 26,
@@ -269,7 +269,7 @@ module.exports = [
         style: 'Belgian Pale Ale',
         size: '16 oz',
         abv: '5.0%',
-        brewery_id: 11,
+        brewery_id: 11
       },
       {
         id: 27,
@@ -277,7 +277,7 @@ module.exports = [
         style: 'Reggendier',
         size: '16 oz',
         abv: '5.0%',
-        brewery_id: 11,
+        brewery_id: 11
       },
       {
         id: 27,
@@ -285,9 +285,9 @@ module.exports = [
         style: 'American IPA',
         size: '16 oz',
         abv: '7.0%',
-        brewery_id: 11,
-      },
-    ],
+        brewery_id: 11
+      }
+    ]
   },
   {
     id: 12,
@@ -299,7 +299,7 @@ module.exports = [
         style: 'Chile Beer',
         size: '12 oz',
         abv: '4.2%',
-        brewery_id: 12,
+        brewery_id: 12
       },
       {
         id: 29,
@@ -307,9 +307,9 @@ module.exports = [
         style: 'American Strong Ale',
         size: '19.2 oz',
         abv: '9.9%',
-        brewery_id: 12,
-      },
-    ],
+        brewery_id: 12
+      }
+    ]
   },
   {
     id: 13,
@@ -321,7 +321,7 @@ module.exports = [
         style: 'Mead',
         size: '16 oz',
         abv: '8.0%',
-        brewery_id: 13,
+        brewery_id: 13
       },
       {
         id: 31,
@@ -329,7 +329,7 @@ module.exports = [
         style: 'Mead',
         size: '12 oz',
         abv: '8.0%',
-        brewery_id: 13,
+        brewery_id: 13
       },
       {
         id: 32,
@@ -337,9 +337,9 @@ module.exports = [
         style: 'Mead',
         size: '16 oz',
         abv: '8.0%',
-        brewery_id: 13,
-      },
-    ],
+        brewery_id: 13
+      }
+    ]
   },
   {
     id: 14,
@@ -351,7 +351,7 @@ module.exports = [
         style: 'Munich Dunkel Lager',
         size: '16 oz',
         abv: '4.9%',
-        brewery_id: 14,
+        brewery_id: 14
       },
       {
         id: 33,
@@ -359,7 +359,7 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '12 oz',
         abv: '5.3%',
-        brewery_id: 14,
+        brewery_id: 14
       },
       {
         id: 34,
@@ -367,7 +367,7 @@ module.exports = [
         style: 'Mead',
         size: '16 oz',
         abv: '6.1%',
-        brewery_id: 14,
+        brewery_id: 14
       },
       {
         id: 35,
@@ -375,7 +375,7 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '12 oz',
         abv: '5.8%',
-        brewery_id: 14,
+        brewery_id: 14
       },
       {
         id: 36,
@@ -383,9 +383,9 @@ module.exports = [
         style: 'American Brown Ale',
         size: '12 oz',
         abv: '5.8%',
-        brewery_id: 14,
-      },
-    ],
+        brewery_id: 14
+      }
+    ]
   },
   {
     id: 15,
@@ -397,9 +397,9 @@ module.exports = [
         style: 'American IPA',
         size: '16 oz',
         abv: '6.5%',
-        brewery_id: 15,
-      },
-    ],
+        brewery_id: 15
+      }
+    ]
   },
   {
     id: 16,
@@ -411,7 +411,7 @@ module.exports = [
         style: 'American Brown Ale',
         size: '12 oz',
         abv: '5.7%',
-        brewery_id: 16,
+        brewery_id: 16
       },
       {
         id: 39,
@@ -419,7 +419,7 @@ module.exports = [
         style: 'American IPA',
         size: '12 oz',
         abv: '6.4%',
-        brewery_id: 16,
+        brewery_id: 16
       },
       {
         id: 40,
@@ -427,9 +427,9 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '12 oz',
         abv: '5.5%',
-        brewery_id: 16,
-      },
-    ],
+        brewery_id: 16
+      }
+    ]
   },
   {
     id: 17,
@@ -441,7 +441,7 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '16 oz',
         abv: '5.3%',
-        brewery_id: 17,
+        brewery_id: 17
       },
       {
         id: 42,
@@ -449,7 +449,7 @@ module.exports = [
         style: 'Kolsch',
         size: '16 oz',
         abv: '4.5%',
-        brewery_id: 17,
+        brewery_id: 17
       },
       {
         id: 43,
@@ -457,7 +457,7 @@ module.exports = [
         style: 'English Bitter',
         size: '16 oz',
         abv: '4.4%',
-        brewery_id: 17,
+        brewery_id: 17
       },
       {
         id: 44,
@@ -465,9 +465,9 @@ module.exports = [
         style: 'American Porter',
         size: '16 oz',
         abv: '4.4%',
-        brewery_id: 17,
-      },
-    ],
+        brewery_id: 17
+      }
+    ]
   },
   {
     id: 18,
@@ -479,9 +479,9 @@ module.exports = [
         style: 'Witbier',
         size: '12 oz',
         abv: '5.2%',
-        brewery_id: 18,
-      },
-    ],
+        brewery_id: 18
+      }
+    ]
   },
   {
     id: 19,
@@ -493,7 +493,7 @@ module.exports = [
         style: 'American Blonde Ale',
         size: '12 oz',
         abv: '5.6%',
-        brewery_id: 19,
+        brewery_id: 19
       },
       {
         id: 47,
@@ -501,7 +501,7 @@ module.exports = [
         style: 'American IPA',
         size: '12 oz',
         abv: '7.0%',
-        brewery_id: 19,
+        brewery_id: 19
       },
       {
         id: 48,
@@ -509,9 +509,9 @@ module.exports = [
         style: 'American Brown Ale',
         size: '12 oz',
         abv: '5.5%',
-        brewery_id: 19,
-      },
-    ],
+        brewery_id: 19
+      }
+    ]
   },
   {
     id: 20,
@@ -523,7 +523,7 @@ module.exports = [
         style: 'American Pale Wheat Ale',
         size: '12 oz',
         abv: '5.9%',
-        brewery_id: 20,
+        brewery_id: 20
       },
       {
         id: 50,
@@ -531,9 +531,9 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '12 oz',
         abv: '5.7%',
-        brewery_id: 20,
-      },
-    ],
+        brewery_id: 20
+      }
+    ]
   },
   {
     id: 21,
@@ -545,7 +545,7 @@ module.exports = [
         style: 'American Amber / Red Lager',
         size: '12 oz',
         abv: '5.7%',
-        brewery_id: 21,
+        brewery_id: 21
       },
       {
         id: 52,
@@ -553,9 +553,9 @@ module.exports = [
         style: 'American IPA',
         size: '12 oz',
         abv: '5.7%',
-        brewery_id: 21,
-      },
-    ],
+        brewery_id: 21
+      }
+    ]
   },
   {
     id: 22,
@@ -567,7 +567,7 @@ module.exports = [
         style: 'American Amber / Red Ale',
         size: '12 oz',
         abv: '5.4%',
-        brewery_id: 22,
+        brewery_id: 22
       },
       {
         id: 54,
@@ -575,7 +575,7 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '12 oz',
         abv: '4.9%',
-        brewery_id: 22,
+        brewery_id: 22
       },
       {
         id: 55,
@@ -583,9 +583,9 @@ module.exports = [
         style: 'American IPA',
         size: '12 oz',
         abv: '6.2%',
-        brewery_id: 22,
-      },
-    ],
+        brewery_id: 22
+      }
+    ]
   },
   {
     id: 23,
@@ -597,7 +597,7 @@ module.exports = [
         style: 'American Amber /Red Ale',
         size: '12 oz',
         abv: '6.0%',
-        brewery_id: 23,
+        brewery_id: 23
       },
       {
         id: 57,
@@ -605,9 +605,9 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '12 oz',
         abv: '6.0%',
-        brewery_id: 23,
-      },
-    ],
+        brewery_id: 23
+      }
+    ]
   },
   {
     id: 24,
@@ -619,9 +619,9 @@ module.exports = [
         style: 'American IPA',
         size: '16 oz',
         abv: '7.8%',
-        brewery_id: 24,
-      },
-    ],
+        brewery_id: 24
+      }
+    ]
   },
   {
     id: 25,
@@ -633,9 +633,9 @@ module.exports = [
         style: 'American Amber /Red Lager',
         size: '12 oz',
         abv: '5.5%',
-        brewery_id: 25,
-      },
-    ],
+        brewery_id: 25
+      }
+    ]
   },
   {
     id: 26,
@@ -647,7 +647,7 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '16 oz',
         abv: '???',
-        brewery_id: 26,
+        brewery_id: 26
       },
       {
         id: 61,
@@ -655,9 +655,9 @@ module.exports = [
         style: 'Irish Dry Stout',
         size: '16 oz',
         abv: '???',
-        brewery_id: 26,
-      },
-    ],
+        brewery_id: 26
+      }
+    ]
   },
   {
     id: 27,
@@ -669,9 +669,9 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '16 oz',
         abv: '7.7%',
-        brewery_id: 27,
-      },
-    ],
+        brewery_id: 27
+      }
+    ]
   },
   {
     id: 28,
@@ -683,9 +683,9 @@ module.exports = [
         style: 'American IPA',
         size: '16 oz',
         abv: '6.2%',
-        brewery_id: 28,
-      },
-    ],
+        brewery_id: 28
+      }
+    ]
   },
   {
     id: 29,
@@ -697,9 +697,9 @@ module.exports = [
         style: 'Kolsch',
         size: '16 oz',
         abv: '5.2%',
-        brewery_id: 29,
-      },
-    ],
+        brewery_id: 29
+      }
+    ]
   },
   {
     id: 30,
@@ -711,7 +711,7 @@ module.exports = [
         style: 'Vienna Lager',
         size: '16 oz',
         abv: '4.6%',
-        brewery_id: 30,
+        brewery_id: 30
       },
       {
         id: 66,
@@ -719,7 +719,7 @@ module.exports = [
         style: 'American Pale Ale (APA)',
         size: '16 oz',
         abv: '5.6%',
-        brewery_id: 30,
+        brewery_id: 30
       },
       {
         id: 67,
@@ -727,8 +727,8 @@ module.exports = [
         style: 'American Porter',
         size: '16 oz',
         abv: '???',
-        brewery_id: 30,
-      },
-    ],
-  },
+        brewery_id: 30
+      }
+    ]
+  }
 ];

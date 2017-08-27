@@ -5,11 +5,11 @@ module.exports = {
     connection: 'postgres://localhost/byob',
     useNullAsDefault: true,
     migrations: {
-      directory: './db/migrations',
+      directory: './db/migrations'
     },
     seeds: {
-      directory: './db/seeds/dev',
-    },
+      directory: './db/seeds/dev'
+    }
   },
 
   production: {
@@ -17,11 +17,11 @@ module.exports = {
     connection: `${process.env.DATABASE_URL}?ssl=true`,
     useNullAsDefault: true,
     migrations: {
-      directory: './db/migrations',
+      directory: './db/migrations'
     },
     seeds: {
-      directory: './db/seeds/prod',
-    },
+      directory: './db/seeds/prod'
+    }
   },
 
   test: {
@@ -29,10 +29,10 @@ module.exports = {
     connection: process.env.DATABASE_URL || 'postgres://localhost/byobtest',
     useNullAsDefault: true,
     migrations: {
-      directory: './db/migrations',
+      directory: './db/migrations'
     },
     seeds: {
-      directory: './db/seeds/test',
-    },
-  },
+      directory: './db/seeds/test'
+    }
+  }
 };

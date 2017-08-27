@@ -6,7 +6,7 @@ const createBeer = (knex, beer) => {
 
 const createBrewery = (knex, brewery) => {
   return knex('brewery').insert({
-    name: brewery.name,
+    name: brewery.name
   }, 'id')
     .then(() => {
       const beerPromises = [];
@@ -18,7 +18,7 @@ const createBrewery = (knex, brewery) => {
             style: beer.style,
             size: beer.size,
             abv: beer.abv,
-            brewery_id: beer.brewery_id,
+            brewery_id: beer.brewery_id
           }),
         );
       });

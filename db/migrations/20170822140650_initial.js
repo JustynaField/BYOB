@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 
 exports.up = function (knex, Promise) {
   return Promise.all([
@@ -16,13 +17,13 @@ exports.up = function (knex, Promise) {
       table.integer('brewery_id').unsigned();
       table.foreign('brewery_id').references('brewery.id');
       table.timestamps(true, true);
-    }),
+    })
   ]);
 };
 
 exports.down = function (knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('beer'),
-    knex.schema.dropTable('brewery'),
+    knex.schema.dropTable('brewery')
   ]);
 };

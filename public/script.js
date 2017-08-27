@@ -14,8 +14,8 @@ const authenticateUser = () => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       email: emailVal,
-      appName: appNameVal,
-    }),
+      appName: appNameVal
+    })
   })
     .then(res => res.json())
     .then((data) => {

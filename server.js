@@ -50,7 +50,7 @@ app.post('/authentication', (request, response) => {
   for (const requiredParameter of ['email', 'appName']) {
     if (!userData[requiredParameter]) {
       return response.status(422).json({
-        error: `Missing required parameter ${requiredParameter}`,
+        error: `Missing required parameter ${requiredParameter}`
       });
     }
   }
@@ -89,7 +89,7 @@ app.get('/api/v1/brewery/:id', (request, response) => {
         response.status(200).json(brewery);
       } else {
         response.status(404).json({
-          error: `Could not find brewery with id of ${request.params.id}`,
+          error: `Could not find brewery with id of ${request.params.id}`
         });
       }
     })
@@ -104,7 +104,7 @@ app.post('/api/v1/brewery', checkAuth, (request, response) => {
   for (const requiredParameter of ['name']) {
     if (!newBrewery[requiredParameter]) {
       return response.status(422).json({
-        error: `Missing required parameter ${requiredParameter}`,
+        error: `Missing required parameter ${requiredParameter}`
       });
     }
   }
@@ -124,7 +124,7 @@ app.patch('/api/v1/brewery/:id', checkAuth, (request, response) => {
   for (const requiredParameter of ['name']) {
     if (!newData[requiredParameter]) {
       return response.status(422).json({
-        error: `Missing required parameter ${requiredParameter}`,
+        error: `Missing required parameter ${requiredParameter}`
       });
     }
   }
@@ -159,7 +159,7 @@ app.get('/api/v1/beer/:id', (request, response) => {
         response.status(200).json(beer);
       } else {
         response.status(404).json({
-          error: `Could not find beer with id of ${request.params.id}`,
+          error: `Could not find beer with id of ${request.params.id}`
         });
       }
     })
@@ -181,7 +181,7 @@ app.get('/api/v1/brewery/:id/beer', (request, response) => {
     })
     .catch((error) => {
       response.status(500).json({
-        error: 'Request cannot be processed',
+        error: 'Request cannot be processed'
       });
     });
 });
@@ -192,7 +192,7 @@ app.post('/api/v1/brewery/:id/beer', checkAuth, (request, response) => {
   for (const requiredParameter of ['name', 'style', 'size', 'abv']) {
     if (!newBeer[requiredParameter]) {
       return response.status(422).json({
-        error: `Missing required parameter ${requiredParameter}`,
+        error: `Missing required parameter ${requiredParameter}`
       });
     }
   }

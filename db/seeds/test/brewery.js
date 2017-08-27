@@ -1,12 +1,12 @@
 const brewery = [
   {
     id: 1,
-    name: 'Great Divide Brewing Company',
+    name: 'Great Divide Brewing Company'
   },
   {
     id: 2,
-    name: 'Avery Brewing Company',
-  },
+    name: 'Avery Brewing Company'
+  }
 ];
 
 const beer = [
@@ -16,7 +16,7 @@ const beer = [
     style: 'American Pale Wheat Ale(APA)',
     size: '12 oz',
     abv: '5.0%',
-    brewery_id: 1,
+    brewery_id: 1
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const beer = [
     style: 'Old Ale',
     size: '12 oz',
     abv: '8.7%',
-    brewery_id: 1,
+    brewery_id: 1
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const beer = [
     style: 'American Pale Wheat Ale',
     size: '12 oz',
     abv: '6.1%',
-    brewery_id: 2,
+    brewery_id: 2
   },
   {
     id: 4,
@@ -40,8 +40,8 @@ const beer = [
     style: 'American Double/ Imperial IPA',
     size: '12 oz',
     abv: '8.0%',
-    brewery_id: 2,
-  },
+    brewery_id: 2
+  }
 ];
 
 exports.seed = (knex, Promise) => {
