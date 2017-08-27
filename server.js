@@ -204,6 +204,22 @@ app.post('/api/v1/brewery/:id/beer', checkAuth, (request, response) => {
 		});
 });
 
+app.delete('/api/v1/brewery/:id/beer', checkAuth, (request, response) => {
+  database('beer')
+    .where('brewery_id', request.params.id)
+    .del('*')
+		.then(obj => {
+			if (obj.length) {
+				response.status(201).json({obj})
+			} else {
+				response.status(404).json({error: 'No breweries with this id exist'})
+			}
+		})
+    .catch(error => {
+      response.status(500).json({ error: 'Request cannot be processed' })
+    })
+});
+
 app.patch('/api/v1/beer/:id', (request, response) => {
 	const newData = request.body;
 
