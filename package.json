@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint ./",
     "test": "./node_modules/.bin/mocha",
     "start": "node server.js"
   },
@@ -23,6 +24,8 @@
     "chai": "^4.1.1",
     "chai-http": "^3.0.0",
     "eslint": "^4.5.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.7.0",
     "mocha": "^3.5.0"
   }
 }
