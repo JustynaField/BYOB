@@ -300,13 +300,21 @@ describe('API Routes', () => {
         response.body.beer[0].should.be.a('object');
         response.body.beer.length.should.equal(2);
         response.body.beer[0].should.have.property('name');
-        response.body.beer[0].name.should.equal('Denver Pale Ale');
+        response.body.beer.find(obj => {
+          return obj.name === 'Denver Pale Ale'
+        }).name.should.equal('Denver Pale Ale');
         response.body.beer[1].should.have.property('name');
-        response.body.beer[1].name.should.equal('Hibernation Ale');
+        response.body.beer.find(obj => {
+          return obj.name === 'Hibernation Ale'
+        }).name.should.equal('Hibernation Ale');
         response.body.beer[0].should.have.property('id');
-        response.body.beer[0].id.should.equal(1);
+        response.body.beer.find(obj => {
+          return obj.name === 'Denver Pale Ale'
+        }).id.should.equal(1);
         response.body.beer[1].should.have.property('id');
-        response.body.beer[1].id.should.equal(2);
+        response.body.beer.find(obj => {
+          return obj.name === 'Hibernation Ale'
+        }).id.should.equal(2);
         done();
       });
     });
