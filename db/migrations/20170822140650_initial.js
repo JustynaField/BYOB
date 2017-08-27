@@ -1,13 +1,13 @@
 
-exports.up = function(knex, Promise) {
+exports.up = function (knex, Promise) {
   return Promise.all([
-    knex.schema.createTable('brewery', function(table) {
+    knex.schema.createTable('brewery', (table) => {
       table.increments('id').primary();
       table.string('name').unique();
       table.timestamps(true, true);
     }),
 
-    knex.schema.createTable('beer', function(table) {
+    knex.schema.createTable('beer', (table) => {
       table.increments('id').primary();
       table.string('name');
       table.string('style');
@@ -16,13 +16,13 @@ exports.up = function(knex, Promise) {
       table.integer('brewery_id').unsigned();
       table.foreign('brewery_id').references('brewery.id');
       table.timestamps(true, true);
-    })
-  ])
+    }),
+  ]);
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function (knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('beer'),
-    knex.schema.dropTable('brewery')
-  ])
+    knex.schema.dropTable('brewery'),
+  ]);
 };

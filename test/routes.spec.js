@@ -143,7 +143,9 @@ describe('API Routes', () => {
           response.should.have.status(201);
           response.body[0].should.be.a('object');
           response.body[0].should.have.property('name');
-          response.body[0].name.should.equal('New Local Brewery');
+          response.body.find(obj => {
+            return obj.name === 'New Local Brewery'
+          }).name.should.equal('New Local Brewery');
           response.body[0].id.should.equal(3);
           chai.request(server)
           .get('/api/v1/brewery')
@@ -153,7 +155,9 @@ describe('API Routes', () => {
             response.body.should.be.a('array');
             response.body.length.should.equal(3);
             response.body[2].should.have.property('name');
-            response.body[2].name.should.equal('New Local Brewery');
+            response.body.find(obj => {
+              return obj.name === 'New Local Brewery'
+            }).name.should.equal('New Local Brewery');
             done();
           });
         });
