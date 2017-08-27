@@ -314,6 +314,32 @@ describe('API Routes', () => {
         });
       });
     });
+
+    it('should not post a beer missing required parameters', (done) => {
+      chai.request(server)
+      .post('/authentication')
+      .send({
+        email: 'user@turing.io'
+      })
+      .end((error, response) => {
+        let token = response.body
+        chai.request(server)
+        .post('/api/v1/brewery/1/beer')
+        .set({'token': `${token.token}`})
+        .send({
+          id: 5,
+          style: 'Porter',
+          size: '12 oz',
+          abv: '4%',
+          brewery_id: 1
+        })
+        .end((error, response) => {
+          response.should.have.status(422);
+          done()
+        });
+      });
+    })
+
   });
 
   describe('DELETE /api/v1/brewery/:id/beer', () => {
