@@ -82,11 +82,11 @@ describe('API Routes', () => {
       .get('/api/v1/brewery/100')
       .end((error, response) => {
         response.should.have.status(404);
+        response.body.error.should.equal('Could not find brewery with id of 100');
         done();
       });
     });
   });
-
 
   describe('POST /api/v1/brewery', () => {
     it('should create a new brewery', (done) => {
@@ -125,47 +125,83 @@ describe('API Routes', () => {
       });
     });
 
-    it.skip('should not create a record if "name" parameter is missing', (done) => {
+    it('should not create a record if "name" parameter is missing', (done) => {
       chai.request(server)
-      .post('/api/v1/brewery')
+      .post('/authentication')
       .send({
-        brewery_name: 'New Brewery'
+        email: 'user@turing.io'
       })
       .end((error, response) => {
-        response.should.have.status(422);
-        response.body.error.should.equal('Missing required parameter name.');
-        done();
+        let token = response.body
+        chai.request(server)
+        .post('/api/v1/brewery')
+        .set({'token': `${token.token}`})
+        .send({
+          brewery_name: 'New Brewery'
+        })
+        .end((error, response) => {
+          response.should.have.status(422);
+          response.body.error.should.equal('Missing required parameter name');
+          done();
+        });
       });
     });
   });
 
   describe('PATCH /api/v1/brewery/:id', () => {
-    it.skip('should update a specific brewery', (done) => {
-       chai.request(server)
-       .patch('/api/v1/brewery/1')
-       .send({
-         name: 'Updated Name'
-       })
-       .end((error, response) => {
-         response.should.have.status(201);
-         response.body[0].should.be.a('object');
-         response.body[0].should.have.property('name');
-         response.body[0].name.should.equal('Updated Name');
-         done();
-       })
-     })
+    it('should update a specific brewery', (done) => {
+      chai.request(server)
+      .post('/authentication')
+      .send({
+       email: 'user@turing.io'
+      })
+      .end((error, response) => {
+        let token = response.body
+        chai.request(server)
+        .patch('/api/v1/brewery/1')
+        .set({'token': `${token.token}` })
+        .send({
+          name: 'Updated Name'
+        })
+        .end((error, response) => {
+          response.should.have.status(201);
+          response.body[0].should.be.a('object');
+          response.body[0].should.have.property('name');
+          response.body[0].name.should.equal('Updated Name');
+          chai.request(server)
+          .get('/api/v1/brewery/1')
+          .end((error, response) => {
+            response.should.have.status(200);
+            response.should.be.json;
+            response.body[0].should.have.property('name');
+            response.body[0].name.should.equal('Updated Name');
+          })
+          done();
+        });
+      });
+    });
 
-     it.skip('should not update without required parameter of name', (done) => {
-       chai.request(server)
-       .patch('/api/v1/brewery/1')
-       .send({location: 'Denver'})
-       .end((error, response) => {
-         response.should.have.status(422);
-         response.body.error.should.equal('Missing required parameter name.');
-
-         done();
-       })
-     })
+    it('should not update a brewery without the required parameter of name', (done) => {
+      chai.request(server)
+      .post('/authentication')
+      .send({
+        email: 'user@turing.io'
+      })
+      .end((error, response) => {
+        let token = response.body
+        chai.request(server)
+        .patch('/api/v1/brewery/1')
+        .set({'token': `${token.token}`})
+        .send({
+          location: 'Denver'
+        })
+        .end((error, response) => {
+          response.should.have.status(422);
+          response.body.error.should.equal('Missing required parameter name');
+          done();
+        });
+      });
+    });
   });
 
   describe('GET /api/v1/beer', () => {
@@ -206,6 +242,30 @@ describe('API Routes', () => {
       .get('/api/v1/beer/100')
       .end((error, response) => {
         response.should.have.status(404);
+        response.body.error.should.equal('Could not find beer with id of 100')
+        done();
+      });
+    });
+  });
+
+  describe('GET /api/v1/brewery/:id/beer', () => {
+    it('should get all beers for a specific brewery', (done) => {
+      chai.request(server)
+      .get('/api/v1/brewery/1/beer')
+      .end((error, response) => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body.should.be.a('array');
+        response.body[0].should.be.a('object');
+        response.body.length.should.equal(2);
+        response.body[0].should.have.property('name');
+        response.body[0].name.should.equal('Denver Pale Ale');
+        response.body[1].should.have.property('name');
+        response.body[1].name.should.equal('Hibernation Ale');
+        response.body[0].should.have.property('id');
+        response.body[0].id.should.equal(1);
+        response.body[1].should.have.property('id');
+        response.body[1].id.should.equal(2);
         done();
       });
     });
@@ -261,28 +321,28 @@ describe('API Routes', () => {
 
   describe('PATCH /api/v1/beer/:id', () => {
     it('should update a specific beer', (done) => {
-       chai.request(server)
-       .patch('/api/v1/beer/1')
-       .send({
-         name: 'Updated Beer',
-         style: 'Updated Style'
-       })
-       .end((error, response) => {
-         response.should.have.status(201);
-         response.body[0].should.be.a('object');
-         response.body[0].should.have.property('name');
-         response.body[0].name.should.equal('Updated Beer');
-         response.body[0].should.have.property('style');
-         response.body[0].style.should.equal('Updated Style');
-         response.body[0].should.have.property('size');
-         response.body[0].size.should.equal('12 oz');
-         response.body[0].should.have.property('abv');
-         response.body[0].abv.should.equal('5.0%');
-         response.body[0].should.have.property('brewery_id');
-         response.body[0].brewery_id.should.equal(1);
-         done();
-       })
-     })
+      chai.request(server)
+      .patch('/api/v1/beer/1')
+      .send({
+        name: 'Updated Beer',
+        style: 'Updated Style'
+      })
+      .end((error, response) => {
+        response.should.have.status(201);
+        response.body[0].should.be.a('object');
+        response.body[0].should.have.property('name');
+        response.body[0].name.should.equal('Updated Beer');
+        response.body[0].should.have.property('style');
+        response.body[0].style.should.equal('Updated Style');
+        response.body[0].should.have.property('size');
+        response.body[0].size.should.equal('12 oz');
+        response.body[0].should.have.property('abv');
+        response.body[0].abv.should.equal('5.0%');
+        response.body[0].should.have.property('brewery_id');
+        response.body[0].brewery_id.should.equal(1);
+        done();
+      });
+    });
   });
 
   describe('DELETE /api/v1/beer/:id', () => {
