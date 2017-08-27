@@ -287,9 +287,31 @@ describe('API Routes', () => {
   describe('POST /api/v1/brewery/:id/beer', () => {
     it('should post beer to a specific brewery', (done) => {
       chai.request(server)
+      .post('/authentication')
       .send({
+        email: 'user@turing.io',
+        appName: 'appName'
       })
       .end((error, response) => {
+        let token = response.body
+        chai.request(server)
+        .post('/api/v1/brewery/1/beer')
+        .set({'token': `${token.token}`})
+        .send({
+          id: 5,
+          name: 'New Beer',
+          style: 'Porter',
+          size: '12 oz',
+          abv: '4%',
+          brewery_id: 1
+        })
+        .end((error, response) => {
+          response.should.have.status(201);
+          response.body.should.be.a('object');
+          response.body.beer[0].should.have.property('name');
+          response.body.beer[0].name.should.equal('New Beer');
+          done()
+        });
       });
     });
   });
