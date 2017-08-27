@@ -82,6 +82,7 @@ describe('API Routes', () => {
       .get('/api/v1/brewery/100')
       .end((error, response) => {
         response.should.have.status(404);
+        response.body.error.should.equal('Could not find brewery with id of 100');
         done();
       });
     });
@@ -180,7 +181,7 @@ describe('API Routes', () => {
       });
     });
 
-    it('should not update without required parameter of name', (done) => {
+    it('should not update a brewery without the required parameter of name', (done) => {
       chai.request(server)
       .post('/authentication')
       .send({
@@ -241,11 +242,11 @@ describe('API Routes', () => {
       .get('/api/v1/beer/100')
       .end((error, response) => {
         response.should.have.status(404);
+        response.body.error.should.equal('Could not find beer with id of 100')
         done();
       });
     });
   });
-
 
   describe('GET /api/v1/brewery/:id/beer', () => {
     it('should get all beers for a specific brewery', (done) => {
