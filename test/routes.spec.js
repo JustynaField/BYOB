@@ -125,47 +125,66 @@ describe('API Routes', () => {
       });
     });
 
-    it.skip('should not create a record if "name" parameter is missing', (done) => {
+    it('should not create a record if "name" parameter is missing', (done) => {
       chai.request(server)
-      .post('/api/v1/brewery')
+      .post('/authentication')
       .send({
-        brewery_name: 'New Brewery'
+        email: 'user@turing.io'
       })
       .end((error, response) => {
-        response.should.have.status(422);
-        response.body.error.should.equal('Missing required parameter name.');
-        done();
+        let token = response.body
+        chai.request(server)
+        .post('/api/v1/brewery')
+        .set({'token': `${token.token}`})
+        .send({
+          brewery_name: 'New Brewery'
+        })
+        .end((error, response) => {
+          response.should.have.status(422);
+          response.body.error.should.equal('Missing required parameter name');
+          done();
+        });
       });
     });
   });
 
   describe('PATCH /api/v1/brewery/:id', () => {
-    it.skip('should update a specific brewery', (done) => {
-       chai.request(server)
-       .patch('/api/v1/brewery/1')
-       .send({
-         name: 'Updated Name'
-       })
-       .end((error, response) => {
-         response.should.have.status(201);
-         response.body[0].should.be.a('object');
-         response.body[0].should.have.property('name');
-         response.body[0].name.should.equal('Updated Name');
-         done();
-       })
-     })
+    it('should update a specific brewery', (done) => {
+      chai.request(server)
+      .post('/authentication')
+      .send({
+       email: 'user@turing.io'
+      })
+      .end((error, response) => {
+        let token = response.body
+        chai.request(server)
+        .patch('/api/v1/brewery/1')
+        .set({'token': `${token.token}` })
+        .send({
+          name: 'Updated Name'
+        })
+        .end((error, response) => {
+          response.should.have.status(201);
+          response.body[0].should.be.a('object');
+          response.body[0].should.have.property('name');
+          response.body[0].name.should.equal('Updated Name');
+          done();
+        });
+      });
+    });
 
-     it.skip('should not update without required parameter of name', (done) => {
-       chai.request(server)
-       .patch('/api/v1/brewery/1')
-       .send({location: 'Denver'})
-       .end((error, response) => {
-         response.should.have.status(422);
-         response.body.error.should.equal('Missing required parameter name.');
+      it.skip('should not update without required parameter of name', (done) => {
+        chai.request(server)
+        .patch('/api/v1/brewery/1')
+        .send({location: 'Denver'})
+
+        .end((error, response) => {
+          response.should.have.status(422);
+          response.body.error.should.equal('Missing required parameter  name.');
 
          done();
-       })
-     })
+       });
+     });
   });
 
   describe('GET /api/v1/beer', () => {
