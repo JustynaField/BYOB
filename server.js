@@ -44,6 +44,14 @@ app.post('/authentication', (request, response) => {
 
   const userData = request.body;
 
+	for (let requiredParameter of ['email', 'appName']) {
+		if (!userData[requiredParameter]) {
+			return response.status(422).json({
+				error: `Missing required parameter ${requiredParameter}`
+			});
+		}
+	}
+
   if(userData.email.endsWith('@turing.io')) {
     userData.admin = true
   }
