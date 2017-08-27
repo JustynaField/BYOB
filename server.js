@@ -193,8 +193,14 @@ app.post('/api/v1/brewery/:id/beer', checkAuth, (request, response) => {
 		.then(brewery => {
 			database('beer').insert(newBeer, '*')
 				.then(beer => {
+					response.status(201).json({beer});
+				})
+				.catch(error => {
+					response.status(404).json({error: 'No breweries with this id exist'})
+				})
 		})
 		.catch(error => {
+			response.status(500).json({ error: 'Request cannot be processed' });
 		});
 });
 
