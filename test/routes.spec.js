@@ -246,6 +246,30 @@ describe('API Routes', () => {
     });
   });
 
+
+  describe('GET /api/v1/brewery/:id/beer', () => {
+    it('should get all beers for a specific brewery', (done) => {
+      chai.request(server)
+      .get('/api/v1/brewery/1/beer')
+      .end((error, response) => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body.should.be.a('array');
+        response.body[0].should.be.a('object');
+        response.body.length.should.equal(2);
+        response.body[0].should.have.property('name');
+        response.body[0].name.should.equal('Denver Pale Ale');
+        response.body[1].should.have.property('name');
+        response.body[1].name.should.equal('Hibernation Ale');
+        response.body[0].should.have.property('id');
+        response.body[0].id.should.equal(1);
+        response.body[1].should.have.property('id');
+        response.body[1].id.should.equal(2);
+        done();
+      });
+    });
+  });
+
   describe('POST /api/v1/brewery/:id/beer', () => {
     it('should post beer to a specific brewery', (done) => {
       chai.request(server)
