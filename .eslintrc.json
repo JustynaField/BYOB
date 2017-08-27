@@ -1,0 +1,35 @@
+{
+  "extends": "airbnb-base",
+  "plugins": [
+    "import"
+  ],
+  "rules": {
+    "no-restricted-syntax": [
+      "error",
+      "ForInStatement",
+      "LabeledStatement",
+      "WithStatement"
+    ],
+    "radix": [
+      0
+    ],
+    "arrow-body-style": [
+      0
+    ],
+    "no-console": 0,
+    "no-shadow": 0
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "jquery": true
+  },
+  "globals": {
+    "document": false,
+    "describe": false,
+    "it": false,
+    "beforeEach": false,
+    "should": false
+  }
+}
