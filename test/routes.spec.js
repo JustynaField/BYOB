@@ -87,7 +87,6 @@ describe('API Routes', () => {
     });
   });
 
-
   describe('POST /api/v1/brewery', () => {
     it('should create a new brewery', (done) => {
       chai.request(server)
@@ -168,6 +167,14 @@ describe('API Routes', () => {
           response.body[0].should.be.a('object');
           response.body[0].should.have.property('name');
           response.body[0].name.should.equal('Updated Name');
+          chai.request(server)
+          .get('/api/v1/brewery/1')
+          .end((error, response) => {
+            response.should.have.status(200);
+            response.should.be.json;
+            response.body[0].should.have.property('name');
+            response.body[0].name.should.equal('Updated Name');
+          })
           done();
         });
       });
