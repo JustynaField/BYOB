@@ -84,7 +84,9 @@ describe('API Routes', () => {
         response.body.should.be.a('array');
         response.body.length.should.equal(2);
         response.body[0].should.have.property('name');
-        response.body[0].name.should.equal('Great Divide Brewing Company');
+        response.body.find(obj => {
+          return obj.name === 'Great Divide Brewing Company'
+        }).name.should.equal('Great Divide Brewing Company');
         done();
       });
     });
@@ -217,7 +219,8 @@ describe('API Routes', () => {
       chai.request(server)
       .post('/authentication')
       .send({
-        email: 'user@turing.io'
+        email: 'user@turing.io',
+        appName: 'appName'
       })
       .end((error, response) => {
         let token = response.body
@@ -246,13 +249,19 @@ describe('API Routes', () => {
         response.body.should.be.a('array');
         response.body.length.should.equal(4);
         response.body[0].should.have.property('name');
-        response.body[0].name.should.equal('Denver Pale Ale');
+        response.body.find(obj => {
+          return obj.name === 'Denver Pale Ale'
+        }).name.should.equal('Denver Pale Ale');
         response.body[0].should.have.property('style');
-        response.body[0].style.should.equal('American Pale Wheat Ale(APA)');
+        response.body.find(obj => {
+          return obj.name === 'Denver Pale Ale'
+        }).style.should.equal('American Pale Wheat Ale(APA)');
         response.body[0].should.have.property('size');
         response.body[0].size.should.equal('12 oz');
         response.body[0].should.have.property('abv');
-        response.body[0].abv.should.equal('5.0%');
+        response.body.find(obj => {
+          return obj.name === 'Denver Pale Ale'
+        }).abv.should.equal('5.0%');
         done();
       });
     });
@@ -291,13 +300,21 @@ describe('API Routes', () => {
         response.body.beer[0].should.be.a('object');
         response.body.beer.length.should.equal(2);
         response.body.beer[0].should.have.property('name');
-        response.body.beer[0].name.should.equal('Denver Pale Ale');
+        response.body.beer.find(obj => {
+          return obj.name === 'Denver Pale Ale'
+        }).name.should.equal('Denver Pale Ale');
         response.body.beer[1].should.have.property('name');
-        response.body.beer[1].name.should.equal('Hibernation Ale');
+        response.body.beer.find(obj => {
+          return obj.name === 'Hibernation Ale'
+        }).name.should.equal('Hibernation Ale');
         response.body.beer[0].should.have.property('id');
-        response.body.beer[0].id.should.equal(1);
+        response.body.beer.find(obj => {
+          return obj.name === 'Denver Pale Ale'
+        }).id.should.equal(1);
         response.body.beer[1].should.have.property('id');
-        response.body.beer[1].id.should.equal(2);
+        response.body.beer.find(obj => {
+          return obj.name === 'Hibernation Ale'
+        }).id.should.equal(2);
         done();
       });
     });
@@ -348,7 +365,8 @@ describe('API Routes', () => {
       chai.request(server)
       .post('/authentication')
       .send({
-        email: 'user@turing.io'
+        email: 'user@turing.io',
+        appName: 'appName'
       })
       .end((error, response) => {
         let token = response.body
@@ -373,7 +391,8 @@ describe('API Routes', () => {
       chai.request(server)
       .post('/authentication')
       .send({
-        email: 'user@turing.io'
+        email: 'user@turing.io',
+        appName: 'appName'
       })
       .end((error, response) => {
         let token = response.body
