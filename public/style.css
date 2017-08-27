@@ -1,7 +1,43 @@
 body {
+  background-image: url('texture.jpg');
+  background-size: cover, no-repeat;
+  margin-top: 8%;
   text-align: center;
+  color: #21100b;
 }
 
-.entry {
-  margin: 30px;
+h1 {
+  font-size: 45px;
+  color: #21100b;
+}
+
+form {
+  font-size: 20px;
+}
+
+p {
+  margin: 10px;
+  font-weight: bold;
+}
+
+input {
+  height: 30px;
+  width: 260px;
+  border: 1px solid #21100b;
+  background-color: #d3c9ba;
+  padding-left: 15px;
+  font-size: 14px;
+}
+
+#email {
+  margin-bottom: 15px;
+}
+
+button {
+  height: 30px;
+  width: 150px;
+  margin: 35px 40px;
+  background-color: #7a5b2c;
+  border: 1px solid #21100b;
+  font-size: 18px;
 }
