@@ -84,7 +84,9 @@ describe('API Routes', () => {
         response.body.should.be.a('array');
         response.body.length.should.equal(2);
         response.body[0].should.have.property('name');
-        response.body[0].name.should.equal('Great Divide Brewing Company');
+        response.body.find(obj => {
+          return obj.name === 'Great Divide Brewing Company'
+        }).name.should.equal('Great Divide Brewing Company');
         done();
       });
     });
