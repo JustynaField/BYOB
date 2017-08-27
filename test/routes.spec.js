@@ -21,11 +21,40 @@ describe('Client Routes', () => {
     });
   });
 
-  it('should return 404 for a route that does not exist', () => {
+  it('should return 404 for a route that does not exist', (done) => {
     chai.request(server)
     .get('/api/v1/breweries')
     .end((error, response) => {
       response.should.have.status(404);
+      done();
+    });
+  });
+});
+
+describe('Authentication', () => {
+
+  it('should allow user access if user submits app name and email address ending with @turing.io', (done) => {
+    chai.request(server)
+    .post('/authentication')
+    .send({
+      email: 'user@turing.io',
+      appName: 'My App'
+    })
+    .end((error, response) => {
+      response.should.have.status(200);
+      done();
+    });
+  });
+
+  it('should not process the request if one parameter is missing', (done) => {
+    chai.request(server)
+    .post('/authentication')
+    .send({
+      email: 'user@turing.io'
+    })
+    .end((error, response) => {
+      response.should.have.status(422);
+      response.body.error.should.equal('Missing required parameter appName');
       done();
     });
   });
