@@ -436,6 +436,18 @@ describe('API Routes', () => {
         done();
       });
     });
+
+    it('should not add a beer if id does not exist', () => {
+      chai.request(server)
+      .patch('/api/v1/beer/300')
+      .send({
+        name: 'Updated Beer',
+        style: 'Updated Style'
+      })
+      .end((error, response) => {
+        response.should.have.status(404);
+      })
+    })
   });
 
   describe('DELETE /api/v1/beer/:id', () => {
