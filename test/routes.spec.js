@@ -321,28 +321,28 @@ describe('API Routes', () => {
 
   describe('PATCH /api/v1/beer/:id', () => {
     it('should update a specific beer', (done) => {
-       chai.request(server)
-       .patch('/api/v1/beer/1')
-       .send({
-         name: 'Updated Beer',
-         style: 'Updated Style'
-       })
-       .end((error, response) => {
-         response.should.have.status(201);
-         response.body[0].should.be.a('object');
-         response.body[0].should.have.property('name');
-         response.body[0].name.should.equal('Updated Beer');
-         response.body[0].should.have.property('style');
-         response.body[0].style.should.equal('Updated Style');
-         response.body[0].should.have.property('size');
-         response.body[0].size.should.equal('12 oz');
-         response.body[0].should.have.property('abv');
-         response.body[0].abv.should.equal('5.0%');
-         response.body[0].should.have.property('brewery_id');
-         response.body[0].brewery_id.should.equal(1);
-         done();
-       })
-     })
+      chai.request(server)
+      .patch('/api/v1/beer/1')
+      .send({
+        name: 'Updated Beer',
+        style: 'Updated Style'
+      })
+      .end((error, response) => {
+        response.should.have.status(201);
+        response.body[0].should.be.a('object');
+        response.body[0].should.have.property('name');
+        response.body[0].name.should.equal('Updated Beer');
+        response.body[0].should.have.property('style');
+        response.body[0].style.should.equal('Updated Style');
+        response.body[0].should.have.property('size');
+        response.body[0].size.should.equal('12 oz');
+        response.body[0].should.have.property('abv');
+        response.body[0].abv.should.equal('5.0%');
+        response.body[0].should.have.property('brewery_id');
+        response.body[0].brewery_id.should.equal(1);
+        done();
+      });
+    });
   });
 
   describe('DELETE /api/v1/beer/:id', () => {
