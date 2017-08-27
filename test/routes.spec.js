@@ -180,18 +180,27 @@ describe('API Routes', () => {
       });
     });
 
-      it.skip('should not update without required parameter of name', (done) => {
+    it('should not update without required parameter of name', (done) => {
+      chai.request(server)
+      .post('/authentication')
+      .send({
+        email: 'user@turing.io'
+      })
+      .end((error, response) => {
+        let token = response.body
         chai.request(server)
         .patch('/api/v1/brewery/1')
-        .send({location: 'Denver'})
-
+        .set({'token': `${token.token}`})
+        .send({
+          location: 'Denver'
+        })
         .end((error, response) => {
           response.should.have.status(422);
-          response.body.error.should.equal('Missing required parameter  name.');
-
-         done();
-       });
-     });
+          response.body.error.should.equal('Missing required parameter name');
+          done();
+        });
+      });
+    });
   });
 
   describe('GET /api/v1/beer', () => {
