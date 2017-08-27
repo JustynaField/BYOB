@@ -19,7 +19,7 @@ const createBrewery = (knex, brewery) => {
             size: beer.size,
             abv: beer.abv,
             brewery_id: beer.brewery_id,
-          }),
+          })
         );
       });
       return Promise.all(beerPromises);
