@@ -219,7 +219,8 @@ describe('API Routes', () => {
       chai.request(server)
       .post('/authentication')
       .send({
-        email: 'user@turing.io'
+        email: 'user@turing.io',
+        appName: 'appName'
       })
       .end((error, response) => {
         let token = response.body
