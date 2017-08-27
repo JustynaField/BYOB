@@ -272,6 +272,16 @@ describe('API Routes', () => {
         done();
       });
     });
+
+    it('should return no beers if id is not found', (done) => {
+      chai.request(server)
+      .get('/api/v1/brewery/50/beer')
+      .end((error, response) => {
+        response.should.have.status(404)
+        response.body.error.should.equal('No breweries with this id exist')
+        done();
+      })
+    })
   });
 
   describe('POST /api/v1/brewery/:id/beer', () => {
