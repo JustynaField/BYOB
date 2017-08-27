@@ -228,6 +228,10 @@ app.patch('/api/v1/beer/:id', (request, response) => {
 		.update(newData, '*')
 		.then(data => {
 			if (data.length) {
+				response.status(201).json({data})
+			} else {
+				response.status(404).json({error: 'No beers exist with that id'})
+			}
 		})
 		.catch(error => {
 			response.status(500).json({ error });
@@ -240,6 +244,7 @@ app.delete('/api/v1/beer/:id', (request, response) => {
     .del('*')
 		.then(obj => {
 			if (obj.length) {
+				response.status(200).json({obj})
 			} else {
 				response.status(404).json({error: 'No beers exist with that id'})
 			}
