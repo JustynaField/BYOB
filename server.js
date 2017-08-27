@@ -227,6 +227,7 @@ app.patch('/api/v1/beer/:id', (request, response) => {
 		.where('id', request.params.id)
 		.update(newData, '*')
 		.then(data => {
+			if (data.length) {
 		})
 		.catch(error => {
 			response.status(500).json({ error });
