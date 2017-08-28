@@ -1,6 +1,6 @@
-# BYOB
+# BYOB (Build Your Own Backend)
 
-The project focuses on building out backend. The data compiled for this project includes a list of Colorado local breweries and beers they produce.
+This project focuses primarily on building the backend. It uses Node.js, Express with Knex and Postgres. The data compiled for this project includes a list of Colorado local breweries and beers they produce. The app is deployed to heroku and is continuously updated via CircleCI.
 
 ## Endpoints
 * POST authentication
@@ -23,9 +23,10 @@ Notes:
 - does it need authentication, or not
 
 
+#### GET api/v1/beer/:id
+- Returns information of a single beer 
+- [https://jw-byob.herokuapp.com/api/v1/beer/5](https://jw-byob.herokuapp.com/api/v1/beer/5)
 
-Justyna:
-* GET api/v1/beer/:id
 * GET api/v1/brewery/:id/beer
 * POST api/v1/brewery/:id/beer
 * DELETE api/v1/brewery/:id/beer
