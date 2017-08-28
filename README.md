@@ -31,10 +31,16 @@ Notes:
 #### GET api/v1/brewery/:id/beer
 - Returns all beers for a specific brewery
 - [https://jw-byob.herokuapp.com/api/v1/brewery/1/beer](https://jw-byob.herokuapp.com/api/v1/brewery/1/beer)
-- Errors: 404 Not Found - if the brewery under the provided id does not exist
+- Errors: 404 Not Found - if the brewery under the provided id does not exist;
 
-* POST api/v1/brewery/:id/beer
-* DELETE api/v1/brewery/:id/beer
+#### POST api/v1/brewery/:id/beer
+- Creates a new beer for a specified brewery
+- Required parameters: 'name', 'style', 'size', 'abv'
+- Errors: 422 Unprocessable Entity - if any of the required parameters is missing; 404 Not Found - if the brewery under the provided id does not exist
+- Requires authentication 
+
+#### DELETE api/v1/brewery/:id/beer
+
 * PATCH api/v1/beer/:id
 * DELETE api/v1/beer/:id
 
