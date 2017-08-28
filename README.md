@@ -25,18 +25,20 @@ Notes:
 
 #### GET api/v1/beer/:id
 - Returns information of a single beer;
+- Required parameter: 'id' - ID of the selected beer;
 - [https://jw-byob.herokuapp.com/api/v1/beer/5](https://jw-byob.herokuapp.com/api/v1/beer/5);
-- Errors: 404 Not Found - if the beer with specified ID does not exist;
+- Errors: 404 Not Found - if the beer with the specified ID does not exist;
 
 #### GET api/v1/brewery/:id/beer
 - Returns all beers for a specific brewery;
+- Required parameter: 'brewery_id';
 - [https://jw-byob.herokuapp.com/api/v1/brewery/1/beer](https://jw-byob.herokuapp.com/api/v1/brewery/1/beer);
 - Errors: 404 Not Found - if the brewery under the provided ID does not exist;
 
 #### POST api/v1/brewery/:id/beer
 - Creates a new beer for a specified brewery;
-- Required parameters: 'name', 'style', 'size', 'abv';
-- Errors: 422 Unprocessable Entity - if any of the required parameters is missing; 404 Not Found - if a brewery under the provided id does not exist;
+- Required parameters for the new beer being posted: 'name', 'style', 'size', 'abv';
+- Errors: 422 Unprocessable Entity - if any of the required parameters is missing; 404 Not Found - if the brewery under the provided id does not exist;
 - Requires authentication; 
 
 #### DELETE api/v1/brewery/:id/beer
@@ -45,7 +47,6 @@ Notes:
 - Errors: 404 Not Found - if the brewery under provided ID does not exist
 - Requires authentication;
 
-
-* PATCH api/v1/beer/:id
+#### PATCH api/v1/beer/:id
 * DELETE api/v1/beer/:id
 
