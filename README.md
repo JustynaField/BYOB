@@ -25,14 +25,14 @@ Notes:
 
 #### GET api/v1/beer/:id
 - Returns information of a single beer;
-- Required parameter: 'id' - ID of the selected beer;
 - Example: [https://jw-byob.herokuapp.com/api/v1/beer/5](https://jw-byob.herokuapp.com/api/v1/beer/5);
+- Required parameter: 'id' - ID of the selected beer;
 - Errors: 404 Not Found - if the beer with the specified ID does not exist;
 
 #### GET api/v1/brewery/:id/beer
 - Returns all beers for a specific brewery;
-- Required parameter: 'brewery_id';
 - Example: [https://jw-byob.herokuapp.com/api/v1/brewery/1/beer](https://jw-byob.herokuapp.com/api/v1/brewery/1/beer);
+- Required parameter: 'brewery_id';
 - Errors: 404 Not Found - if the brewery under the provided ID does not exist;
 
 #### POST api/v1/brewery/:id/beer
