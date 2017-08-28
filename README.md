@@ -1,26 +1,45 @@
 # BYOB (Build Your Own Backend)
 
-This project focuses primarily on building the backend. It uses Node.js, Express with Knex and Postgres. The data compiled for this project includes a list of Colorado local breweries and beers they produce. The app is deployed to heroku and is continuously updated via CircleCI.
+This project focuses primarily on building the backend for an API. It uses Node.js, Express with Knex, and Postgres. The data compiled for this project includes a list of Colorado local breweries and beers they produce. The app is deployed to heroku and is continuously updated via CircleCI.
+
+There are two tables in this project. One titled 'brewery' that holds just the names of Colorado breweries. The second is called 'beer' that describes the different beers for each brewery with 'name', 'style', 'size', and 'abv'.
 
 ## Endpoints
-* POST authentication
-* GET api/v1/brewery
-Returns a list of thirty breweries.
-This route does not require authentication.
-Breweries can be searched by specific brewery name.
-Example:
-api/v1/brewery/?name=Avery+Brewing+Company
 
-* GET api/v1/brewery/:id
-* POST api/v1/brewery
-* PATCH api/v1/brewery/:id
-* GET api/v1/beer
+#### POST authentication
+- Authenticates whether user is admin or not and returns a new json web token (jwt)
+- Required parameters: 'email' - Email of user requestion api access; 'appName' - Name of application user will be applying the api to;
 
-Notes:
-- what the route returns
-- types of errors for each route
-- required parameters
-- does it need authentication, or not
+
+#### GET api/v1/brewery
+- Returns a list of thirty breweries;
+- Example: [https://jw-byob.herokuapp.com/api/v1/brewery/](https://jw-byob.herokuapp.com/api/v1/brewery/);
+- Errors: 500 Internal Server Error
+- Breweries can be searched by specific brewery name.
+Example: [https://jw-byob.herokuapp.com/api/v1/brewery/?name=Avery+Brewing+Company](https://jw-byob.herokuapp.com/api/v1/brewery/?name=Avery+Brewing+Company);
+
+#### GET api/v1/brewery/:id
+- Returns a specific brewery by its ID;
+- Example: [https://jw-byob.herokuapp.com/api/v1/brewery/1](https://jw-byob.herokuapp.com/api/v1/brewery/1);
+- Errors: 404 Could not find brewery with id - if id being searched does not exist; 500 Internal server error
+
+#### POST api/v1/brewery
+- Posts new brewery to brewery database;
+- Required parameter:
+ - 'name' - Name of new brewery;
+- Errors: 422 Missing required parameter - 'name' has not been defined; 500 Internal server error;
+- Requires authentication;
+
+#### PATCH api/v1/brewery/:id
+- Update information for a specific brewery;
+- Required parameter: 'name' - Updated name for brewery;
+- Errors: 422 Missing required parameter - If name is not entered when updating brewery; 500 internal server error
+- Requires authentication
+
+#### GET api/v1/beer
+- Returns list of 69 beers from Colorado;
+- Example: [https://jw-byob.herokuapp.com/api/v1/beer/](https://jw-byob.herokuapp.com/api/v1/beer/);
+- Error: 500 Internal server error
 
 
 #### GET api/v1/beer/:id
