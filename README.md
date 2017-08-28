@@ -44,9 +44,17 @@ Notes:
 #### DELETE api/v1/brewery/:id/beer
 - Deletes all beers from a specified brewey;
 - Required parameter: 'brewery_id';
-- Errors: 404 Not Found - if the brewery under provided ID does not exist
+- Errors: 404 Not Found - if the brewery under provided ID does not exist;
 - Requires authentication;
 
 #### PATCH api/v1/beer/:id
-* DELETE api/v1/beer/:id
+- Updates some keys in a specified beer;
+- Required parameter: 'id' - ID of the selected beer;
+- Errors: 404 Not Found - if the requested beer does not exist;
+
+#### DELETE api/v1/beer/:id
+- Deletes one beer;
+- Required parameter: 'id' - ID of the beer to delete;
+- Errors: 404 Not Found - if the requested beer does not exist;
+
 
